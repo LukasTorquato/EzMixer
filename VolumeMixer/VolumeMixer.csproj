@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+	<StartupObject>VolumeMixer.Program</StartupObject>
+	<Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Images\blackknob.png" />
+    <None Remove="Assets\Images\coloredknob.png" />
+    <None Remove="Assets\Images\whiteknob.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AudioSwitcher.AudioApi.CoreAudio" Version="3.0.0.1" />
+    <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+    <PackageReference Include="System.Management" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Icons\" />
+    <Folder Include="Config\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\blackknob.png" />
+    <Resource Include="Assets\Images\coloredknob.png" />
+    <Resource Include="Assets\Images\whiteknob.png" />
+  </ItemGroup>
+
+</Project>

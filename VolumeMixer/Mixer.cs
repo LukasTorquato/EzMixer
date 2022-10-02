@@ -1,0 +1,191 @@
+﻿using AudioSwitcher.AudioApi.CoreAudio;
+using AudioSwitcher.AudioApi.Observables;
+using AudioSwitcher.AudioApi.Session;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection.Metadata;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace VolumeMixer
+{
+    public class Mixer
+    {
+        //guarda o dispositivo de reprodução atual
+        private CoreAudioDevice CurrentPlaybackDevice { get; set; }
+        //guarda o dispositivo de Mic
+        private CoreAudioDevice CurrentRecordDevice { get; set; }
+
+        //dic para salvar e carregar os Apps escolhidos e a iluminação de cada controle
+        private Dictionary<string, string[]> state;
+
+        //array que guarda as sessions do mixer
+        private IAudioSession[] audioSessions;
+
+        //int para marcar o controle que comanda o master volume
+        private int masterAssignedPosition;
+
+        //int para marcar o controle que comanda o microfone
+        private int micAssignedPosition;
+        
+        //int que guarda quantos controles o mixer tem
+        private int numSliders { get; set; }
+
+        public Dictionary<string, string> AvailableApps { get; set; }
+        
+        //função para atualizar os dispositivos de playback e record atuais
+        public void UpdateCurrentDevice()
+        {
+            CurrentPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
+            CurrentRecordDevice = new CoreAudioController().DefaultCaptureDevice;
+            audioSessions = new IAudioSession[numSliders];
+        }
+
+        //função para atualizar a session para um determinado controle
+        public void UpdateAudioSession(int pos, string name)
+        {
+            if (name == Constants.Master)
+            {
+                //Deixa a posição "pos" nula no array de audioSessions
+                Array.Clear(audioSessions,pos,1);
+                masterAssignedPosition = pos;
+                state[Constants.StateKeys][pos] = state[Constants.StateNames][pos] = Constants.Master;
+            }
+            else if (name == Constants.Mic)
+            {
+                Array.Clear(audioSessions, pos, 1);
+                micAssignedPosition = pos;
+                state[Constants.StateKeys][pos] = state[Constants.StateNames][pos] = Constants.Mic;
+            }
+            else
+            {
+                if (masterAssignedPosition == pos)
+                    masterAssignedPosition = -1;
+                else if (micAssignedPosition == pos)
+                    micAssignedPosition = -1;
+
+                string pname;
+
+                foreach (var session in CurrentPlaybackDevice.SessionController)
+                {
+                    pname = Process.GetProcessById(session.ProcessId).ProcessName;
+
+                    if (pname == name || session.DisplayName == name)
+                    {
+                        audioSessions[pos] = session;
+                        state[Constants.StateKeys][pos] = pname;
+                        state[Constants.StateNames][pos] = name;
+                    }
+                    else if (name == Constants.SysSounds && session.DisplayName.Contains("System32"))
+                    {
+                        audioSessions[pos] = session;
+                        state[Constants.StateKeys][pos] = pname;
+                        state[Constants.StateNames][pos] = name;
+                    }
+                    else if(AvailableApps.ContainsValue(name))
+                    {
+                        state[Constants.StateKeys][pos] = AvailableApps.FirstOrDefault(x => x.Value == name).Key;
+                        state[Constants.StateNames][pos] = name;
+                    }
+                }
+            }
+        }
+
+        //função para atualizar a iluminação para um determinado controle
+        public void UpdateLighting(int pos, string color)
+        {
+            state[Constants.StateLighting][pos] = color;
+        }
+
+
+        //função que retorna o volume atual de um determinado controle
+        public double GetSessionVolume(int pos)
+        {
+            if (masterAssignedPosition == pos)
+                return CurrentPlaybackDevice.Volume;
+            else if (micAssignedPosition == pos)
+                return CurrentRecordDevice.Volume;
+            else if(audioSessions[pos] != null)
+                return audioSessions[pos].Volume;
+            else
+                return 0;
+        }
+
+        //função que seta o volume atual para um determinado controle
+        public void SetSessionVolume(int pos, double vol)
+        {
+            if (masterAssignedPosition == pos)
+                CurrentPlaybackDevice.Volume = vol;
+            else if(micAssignedPosition == pos)
+                CurrentRecordDevice.Volume = vol;
+            else if(audioSessions[pos] != null)
+                audioSessions[pos].Volume = vol;
+                
+        }
+
+        //função que retona os Apps disponíveis no mixer do windows
+        public void StartAvailableApps()
+        {
+            string pname;
+            AvailableApps[Constants.Master] = Constants.Master;
+            AvailableApps[Constants.Mic] = Constants.Mic;
+
+            foreach (var session in CurrentPlaybackDevice.SessionController)
+            {
+                pname = Process.GetProcessById(session.ProcessId).ProcessName;
+                if (session.DisplayName == "")
+                    AvailableApps[pname] = pname;
+                else
+                {
+                    if (session.DisplayName.Contains("System32"))
+                        AvailableApps[pname] = Constants.SysSounds;
+                    else
+                        AvailableApps[pname] = session.DisplayName;
+                }
+            }
+        }
+
+        //função que carrega o estado do arquivo para o atual do mixer
+        public void LoadState(Dictionary<string, string[]> jsonState)
+        {
+            state[Constants.StateKeys] = jsonState[Constants.StateKeys];
+            state[Constants.StateNames] = jsonState[Constants.StateNames];
+            state[Constants.StateLighting] = jsonState[Constants.StateLighting];
+
+            for (int i = 0; i < numSliders; i++)
+            {
+                UpdateAudioSession(i, state[Constants.StateNames][i]);
+                if (AvailableApps.ContainsKey(state[Constants.StateKeys][i]) == false)
+                    AvailableApps[state[Constants.StateKeys][i]] = state[Constants.StateNames][i];
+            }
+        }
+
+        //função que retorna o estado atual do mixer
+        public Dictionary<string, string[]> GetState() => state;
+        public void SetSessionObserver(SessionCreatedWatcher watcher) => CurrentPlaybackDevice.SessionController.SessionCreated.Subscribe(watcher);
+        public void SetSessionDObserver(SessionDisconnectedWatcher watcher) => CurrentPlaybackDevice.SessionController.SessionDisconnected.Subscribe(watcher);
+        public static void SetDeviceObserver(DeviceWatcher watcher) => new CoreAudioController().AudioDeviceChanged.Subscribe(watcher);
+        
+        public Mixer(int _numSliders)
+        {
+            numSliders = _numSliders;
+            masterAssignedPosition = -1;
+            micAssignedPosition = -1;
+            
+            CurrentPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
+            CurrentRecordDevice = new CoreAudioController().DefaultCaptureDevice;
+            audioSessions = new IAudioSession[numSliders];
+            AvailableApps = new Dictionary<string, string>();
+            StartAvailableApps();
+
+            state = new Dictionary<string, string[]>
+            {
+                [Constants.StateKeys] = new string[numSliders],
+                [Constants.StateNames] = new string[numSliders],
+                [Constants.StateLighting] = new string[numSliders]
+            };
+        }
+    }
+}
