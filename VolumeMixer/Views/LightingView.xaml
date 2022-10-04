@@ -6,12 +6,12 @@
              xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:local="clr-namespace:VolumeMixer.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="790">
+             d:DesignHeight="500" d:DesignWidth="800">
 
     <Grid Margin="30,0,30,30">
         <Grid.RowDefinitions >
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="250"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -22,6 +22,217 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <Border Width="720"
+            Height="140"
+            Grid.Row="1" 
+            Grid.Column="0"
+            Grid.ColumnSpan="5"
+            BorderThickness="5"
+            CornerRadius="40"
+            BorderBrush="DarkSlateGray">
+        </Border>
+
+
+        <!-- Volume 1 Controls Start-->
+        <Canvas Grid.Row="1"
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            Height="100"
+            Width="100">
+
+            <Image Source="/Assets/Images/meterlessknobh.png"
+                Height="100"/>
+            <Ellipse  Width="100"
+                Name = "Volume1Ring" 
+                Height="100"
+                Fill="Transparent"
+                StrokeThickness="5"
+                Stroke="AliceBlue"/>
+            
+        </Canvas>
+
+        <mah:ColorPicker
+            Grid.Row="1"
+            Grid.Column="0"
+            Height="20"
+            Width="100"
+            VerticalAlignment="Bottom"
+            Foreground="Red"
+            Background="DarkSlateGray"
+            FontFamily="/Fonts/Poppins/#Poppins Medium"
+            FontSize="12"
+            Opacity="0.8"
+            Name="Volume1_ColorPicker"
+            IsAlphaChannelVisible="False"
+            AreHsvChannelsVisible="False"
+            SelectedColorChanged="Volume_SelectedColorChanged">
+
+        </mah:ColorPicker>
+
+        <!-- Volume 1 Controls End-->
+
+        <!-- Volume 2 Controls Start-->
+        <Canvas Grid.Row="1"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Height="100"
+            Width="100">
+
+            <Image Source="/Assets/Images/meterlessknobh.png"
+                Height="100" 
+                Width="100"/>
+            <Ellipse  Width="100"
+                Name = "Volume2Ring" 
+                Height="100"
+                Fill="Transparent"
+                StrokeThickness="3"
+                Stroke="AliceBlue"/>
+
+        </Canvas>
+
+        <mah:ColorPicker
+            Grid.Row="1"
+            Grid.Column="1"
+            Height="25"
+            Width="100"
+            VerticalAlignment="Bottom"
+            Foreground="White"
+            Background="DarkSlateGray"
+            FontFamily="/Fonts/Poppins/#Poppins Medium"
+            FontSize="12"
+            Opacity="0.8"
+            Name="Volume2_ColorPicker"
+            IsAlphaChannelVisible="False"
+            AreHsvChannelsVisible="False"
+            SelectedColorChanged="Volume_SelectedColorChanged">
+
+        </mah:ColorPicker>
+
+        <!-- Volume 2 Controls End-->
+
+
+
+        <!-- Volume 3 Controls Start-->
+        <Canvas Grid.Row="1"
+            Grid.Column="2"
+            VerticalAlignment="Center"
+            Height="100"
+            Width="100">
+
+            <Image Source="/Assets/Images/meterlessknobh.png"
+                Height="100" 
+                Width="100"/>
+            <Ellipse  Width="100"
+                Name = "Volume3Ring" 
+                Height="100"
+                Fill="Transparent"
+                StrokeThickness="3"
+                Stroke="AliceBlue"/>
+
+        </Canvas>
+
+        <mah:ColorPicker
+            Grid.Row="1"
+            Grid.Column="2"
+            Height="25"
+            Width="100"
+            VerticalAlignment="Bottom"
+            Foreground="White"
+            Background="DarkSlateGray"
+            FontFamily="/Fonts/Poppins/#Poppins Medium"
+            FontSize="12"
+            Opacity="0.8"
+            Name="Volume3_ColorPicker"
+            IsAlphaChannelVisible="False"
+            AreHsvChannelsVisible="False"
+            SelectedColorChanged="Volume_SelectedColorChanged">
+
+        </mah:ColorPicker>
+
+        <!-- Volume 3 Controls End-->
+
+
+
+        <!-- Volume 4 Controls Start-->
+        <Canvas Grid.Row="1"
+            Grid.Column="3"
+            VerticalAlignment="Center"
+            Height="100"
+            Width="100">
+
+            <Image Source="/Assets/Images/meterlessknobh.png"
+                Height="100" 
+                Width="100"/>
+            <Ellipse  Width="100"
+                Name = "Volume4Ring" 
+                Height="100"
+                Fill="Transparent"
+                StrokeThickness="3"
+                Stroke="AliceBlue"/>
+
+        </Canvas>
+
+        <mah:ColorPicker
+            Grid.Row="1"
+            Grid.Column="3"
+            Height="25"
+            Width="100"
+            VerticalAlignment="Bottom"
+            Foreground="White"
+            Background="DarkSlateGray"
+            FontFamily="/Fonts/Poppins/#Poppins Medium"
+            FontSize="12"
+            Opacity="0.8"
+            Name="Volume4_ColorPicker"
+            IsAlphaChannelVisible="False"
+            AreHsvChannelsVisible="False"
+            SelectedColorChanged="Volume_SelectedColorChanged">
+
+        </mah:ColorPicker>
+
+        <!-- Volume 4 Controls End-->
+
+        <!-- Volume 5 Controls Start-->
+        <Canvas Grid.Row="1"
+            Grid.Column="4"
+            VerticalAlignment="Center"
+            Height="100"
+            Width="100">
+
+            <Image Source="/Assets/Images/meterlessknobh.png"
+                Height="100" 
+                Width="100"/>
+            <Ellipse  Width="100"
+                Name = "Volume5Ring" 
+                Height="100"
+                Fill="Transparent"
+                StrokeThickness="3"
+                Stroke="AliceBlue"/>
+
+        </Canvas>
+
+        <mah:ColorPicker
+            Grid.Row="1"
+            Grid.Column="4"
+            Height="25"
+            Width="100"
+            VerticalAlignment="Bottom"
+            Foreground="White"
+            Background="DarkSlateGray"
+            FontFamily="/Fonts/Poppins/#Poppins Medium"
+            FontSize="12"
+            Opacity="0.8"
+            Name="Volume5_ColorPicker"
+            IsAlphaChannelVisible="False"
+            AreHsvChannelsVisible="False"
+            SelectedColorChanged="Volume_SelectedColorChanged">
+
+        </mah:ColorPicker>
+
+        <!-- Volume 5 Controls End-->
+
+        
+        
         <TextBlock Text="Volume Binding"
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
@@ -32,55 +243,18 @@
                 FontSize="20"
                 FontFamily="/Fonts/Poppins/#Poppins Light"/>
 
-        <Border Width="740"
-            Height="2"
-            VerticalAlignment="Top"
-            Grid.Row="1" 
-            Grid.Column="0"
-            Grid.ColumnSpan="5">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                    <GradientStop Color="Black" Offset="0.0"/>
-                    <GradientStop Color="Silver" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-            <Border.Clip>
-                <RectangleGeometry RadiusX="2"
-                                RadiusY="2"
-                                Rect="0,0,800,2"/>
-            </Border.Clip>
-        </Border>
-
-        <Border Width="740"
-            Height="2"
-            VerticalAlignment="Top"
-            Grid.Row="2" 
-            Grid.Column="0"
-            Grid.ColumnSpan="5">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                    <GradientStop Color="Black" Offset="0.0"/>
-                    <GradientStop Color="Silver" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-            <Border.Clip>
-                <RectangleGeometry RadiusX="2"
-                                RadiusY="2"
-                                Rect="0,0,740,2"/>
-            </Border.Clip>
-        </Border>
-
         
-            <!--
-        <xamlhost:WindowsXamlHost 
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    x:Name="UIColorPicker"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    InitialTypeName="Windows.UI.Xaml.Controls.ColorPicker">
 
-        </xamlhost:WindowsXamlHost>-->
+        <mah:ToggleSwitch Grid.Column="0"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                          Header="Volume 1"
+                    Margin="-60,60,0,0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    
+                    Foreground="White"/>
+
         <CheckBox Grid.Column="1"
                   Grid.Row="2"
                   Margin="0,60,0,0"
@@ -106,196 +280,5 @@
                   Margin="0,60,0,0"
                   VerticalAlignment="Top"
                   HorizontalAlignment="Center"/>
-        
-        <Canvas Grid.Column="0"
-                Grid.Row="1">
-            <Path Stroke="Green"
-                  Name="Volume1_RGB"
-                  Stretch="Fill"
-                  Margin="8,40,0,0" 
-                  StrokeThickness="8"
-                  Height="70" 
-                  Width="130">
-                <Path.Data>
-                    <PathGeometry>
-                        <PathGeometry.Figures>
-                            <PathFigureCollection>
-                                <PathFigure StartPoint="0,50">
-                                    <PathFigure.Segments>
-                                        <PathSegmentCollection>
-                                            <ArcSegment Size="25,1"
-                                                IsLargeArc="True"
-                                                SweepDirection="Clockwise"
-                                                Point="50,50" />
-                                        </PathSegmentCollection>
-                                    </PathFigure.Segments>
-                                </PathFigure>
-                            </PathFigureCollection>
-                        </PathGeometry.Figures>
-                    </PathGeometry>
-                </Path.Data>
-            </Path>
-        </Canvas>
-        
-        <Image Grid.Row="1"
-            Grid.Column="0" 
-            Source="/Assets/Images/coloredknob.png"
-            Height="100" 
-            Width="100"/>
-        <mah:ColorPicker 
-            Grid.Row="1"
-            LabelAlphaChannel="aas"
-            TextBlock.TextAlignment="Center"
-            VerticalAlignment="Bottom"
-            Foreground="White"
-            Background="Transparent"
-            FontSize="12"
-            FontFamily="/Fonts/Poppins/#Poppins Medium">
-
-        </mah:ColorPicker>
-
-        <Canvas Grid.Column="1"
-                Grid.Row="1">
-            <Path Stroke="Green"
-                  Name="Volume2_RGB"
-                  Stretch="Fill"
-                  Margin="8,40,0,0" 
-                  StrokeThickness="8"
-                  Height="70" 
-                  Width="130">
-                <Path.Data>
-                    <PathGeometry>
-                        <PathGeometry.Figures>
-                            <PathFigureCollection>
-                                <PathFigure StartPoint="0,50">
-                                    <PathFigure.Segments>
-                                        <PathSegmentCollection>
-                                            <ArcSegment Size="25,1"
-                                                IsLargeArc="True"
-                                                SweepDirection="Clockwise"
-                                                Point="50,50" />
-                                        </PathSegmentCollection>
-                                    </PathFigure.Segments>
-                                </PathFigure>
-                            </PathFigureCollection>
-                        </PathGeometry.Figures>
-                    </PathGeometry>
-                </Path.Data>
-            </Path>
-        </Canvas>
-
-        <Image Grid.Row="1"
-            Grid.Column="1" 
-            Source="/Assets/Images/coloredknob.png"
-            Height="100" 
-            Width="100"/>
-
-        <Canvas Grid.Column="2"
-                Grid.Row="1">
-            <Path Stroke="Green"
-                  Name="Volume3_RGB"
-                  Stretch="Fill"
-                  Margin="8,40,0,0" 
-                  StrokeThickness="8"
-                  Height="70" 
-                  Width="130">
-                <Path.Data>
-                    <PathGeometry>
-                        <PathGeometry.Figures>
-                            <PathFigureCollection>
-                                <PathFigure StartPoint="0,50">
-                                    <PathFigure.Segments>
-                                        <PathSegmentCollection>
-                                            <ArcSegment Size="25,1"
-                                                IsLargeArc="True"
-                                                SweepDirection="Clockwise"
-                                                Point="50,50" />
-                                        </PathSegmentCollection>
-                                    </PathFigure.Segments>
-                                </PathFigure>
-                            </PathFigureCollection>
-                        </PathGeometry.Figures>
-                    </PathGeometry>
-                </Path.Data>
-            </Path>
-        </Canvas>
-
-        <Image Grid.Row="1"
-            Grid.Column="2" 
-            Source="/Assets/Images/coloredknob.png"
-            Height="100" 
-            Width="100"/>
-
-        <Canvas Grid.Column="3"
-                Grid.Row="1">
-            <Path Stroke="Green"
-                  Name="Volume4_RGB"
-                  Stretch="Fill"
-                  Margin="8,40,0,0" 
-                  StrokeThickness="8"
-                  Height="70" 
-                  Width="130">
-                <Path.Data>
-                    <PathGeometry>
-                        <PathGeometry.Figures>
-                            <PathFigureCollection>
-                                <PathFigure StartPoint="0,50">
-                                    <PathFigure.Segments>
-                                        <PathSegmentCollection>
-                                            <ArcSegment Size="25,1"
-                                                IsLargeArc="True"
-                                                SweepDirection="Clockwise"
-                                                Point="50,50" />
-                                        </PathSegmentCollection>
-                                    </PathFigure.Segments>
-                                </PathFigure>
-                            </PathFigureCollection>
-                        </PathGeometry.Figures>
-                    </PathGeometry>
-                </Path.Data>
-            </Path>
-        </Canvas>
-
-        <Image Grid.Row="1"
-            Grid.Column="3" 
-            Source="/Assets/Images/coloredknob.png"
-            Height="100" 
-            Width="100"/>
-
-        <Canvas Grid.Column="4"
-                Grid.Row="1">
-            <Path Stroke="Green"
-                  Name="Volume5_RGB"
-                  Stretch="Fill"
-                  Margin="8,40,0,0" 
-                  StrokeThickness="8"
-                  Height="70" 
-                  Width="130">
-                <Path.Data>
-                    <PathGeometry>
-                        <PathGeometry.Figures>
-                            <PathFigureCollection>
-                                <PathFigure StartPoint="0,50">
-                                    <PathFigure.Segments>
-                                        <PathSegmentCollection>
-                                            <ArcSegment Size="25,1"
-                                                IsLargeArc="True"
-                                                SweepDirection="Clockwise"
-                                                Point="50,50" />
-                                        </PathSegmentCollection>
-                                    </PathFigure.Segments>
-                                </PathFigure>
-                            </PathFigureCollection>
-                        </PathGeometry.Figures>
-                    </PathGeometry>
-                </Path.Data>
-            </Path>
-        </Canvas>
-        <Image Grid.Row="1"
-            Grid.Column="4" 
-            Source="/Assets/Images/coloredknob.png"
-            Height="100" 
-            Width="100"/>
-
     </Grid>
 </UserControl>

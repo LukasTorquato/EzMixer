@@ -7,12 +7,29 @@
     <UseWPF>true</UseWPF>
 	<StartupObject>VolumeMixer.Program</StartupObject>
 	<Platforms>AnyCPU;x64</Platforms>
+	<ApplicationIcon>Assets\Icons\mixericobig.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Icons\mixerico.ico" />
+    <None Remove="Assets\Icons\mixericob.ico" />
+    <None Remove="Assets\Icons\mixericobig.ico" />
+    <None Remove="Assets\Icons\mixericoblackh.ico" />
+    <None Remove="Assets\Icons\mixericowhiteh.ico" />
     <None Remove="Assets\Images\blackknob.png" />
     <None Remove="Assets\Images\coloredknob.png" />
+    <None Remove="Assets\Images\meterlessknob.png" />
+    <None Remove="Assets\Images\meterlessknobh.png" />
+    <None Remove="Assets\Images\mixerblackh.png" />
+    <None Remove="Assets\Images\mixerico.png" />
+    <None Remove="Assets\Images\mixericob.png" />
+    <None Remove="Assets\Images\mixericobig.png" />
+    <None Remove="Assets\Images\mixerwhiteh.png" />
     <None Remove="Assets\Images\whiteknob.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Icons\mixericobig.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,13 +40,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\Icons\" />
     <Folder Include="Config\" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Icons\mixerico.ico" />
+    <Resource Include="Assets\Icons\mixericob.ico" />
+    <Resource Include="Assets\Icons\mixericobig.ico" />
+    <Resource Include="Assets\Icons\mixericoblackh.ico" />
+    <Resource Include="Assets\Icons\mixericowhiteh.ico" />
     <Resource Include="Assets\Images\blackknob.png" />
     <Resource Include="Assets\Images\coloredknob.png" />
+    <Resource Include="Assets\Images\meterlessknob.png" />
+    <Resource Include="Assets\Images\meterlessknobh.png" />
+    <Resource Include="Assets\Images\mixerblackh.png" />
+    <Resource Include="Assets\Images\mixerico.png" />
+    <Resource Include="Assets\Images\mixericob.png" />
+    <Resource Include="Assets\Images\mixericobig.png" />
+    <Resource Include="Assets\Images\mixerwhiteh.png" />
     <Resource Include="Assets\Images\whiteknob.png" />
   </ItemGroup>
 

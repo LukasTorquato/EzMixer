@@ -17,31 +17,14 @@
 
         </xamlhost:WindowsXamlHost>-->
 
-        <mah:ToggleSwitch Foreground="White"
+        <mah:ToggleSwitch Margin="100"
+                            Height="50"
+             Foreground="White"
                           TextBlock.FontSize="16"
                           Background="AliceBlue"/>
 
 
-        <mah:ColorPicker Height="150"
-                        Width="250"
-                        Foreground="White"
-                        Background="Transparent"
-                        FontSize="16"
-                        Name="Colorpicker"
-                        mah:TextBoxHelper.ClearTextButton="True"
-                        mah:TextBoxHelper.Watermark="Select a color"
-                        FontFamily="/Fonts/Poppins/#Poppins Medium"
-                        
-                        AddToRecentColorsTrigger="SelectedColorChanged"
-                        SelectedColorChanged="Colorpicker_SelectedColorChanged">
-            
-        </mah:ColorPicker>
-
-        <mah:ColorPickerBase Height="150"
-                             
-                        Width="250">
-
-        </mah:ColorPickerBase>
+        
 
     </StackPanel>
 </UserControl>

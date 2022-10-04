@@ -6,10 +6,11 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:VolumeMixer"
         mc:Ignorable="d"
-        Title="Volume Mixer" Height="600" Width="1000"
+        Title="EZMixer" Height="600" Width="1000"
         ResizeMode="NoResize"
-        Background="Transparent"
-        AllowsTransparency="False">
+        ShowIconOnTitleBar="True"
+        Icon="/Assets/Icons/mixerico.ico"
+        Background="Transparent">
     
 
     <Border Background="#272537" >
@@ -96,7 +97,6 @@
             </Border>
             <Border Grid.Row="1"
                     Grid.Column="1"
-                    CornerRadius="5"
                     Margin="0">
                 <ContentControl x:Name="MainContentControl"/>
             </Border>

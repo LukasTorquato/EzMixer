@@ -45,21 +45,22 @@
             Grid.Column="2">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                    <GradientStop Color="Purple" Offset="0.0"/>
-                    <GradientStop Color="Orange" Offset="1"/>
+                    <GradientStop Color="MediumPurple" Offset="0.0"/>
+                    <GradientStop Color="DarkCyan" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
             <Border.Clip>
-                <RectangleGeometry RadiusX="0"
-                                RadiusY="0"
+                <RectangleGeometry RadiusX="5"
+                                RadiusY="5"
                                 Rect="0,0,500,30"/>
                 
             </Border.Clip>
 
             <ComboBox ItemsSource="{Binding Controller.AvailableApps.Values}"
                     Name="volume1"
-                    Opacity="0.5"
-                    FontSize="22"
+                    Opacity="0.65"
+                    FontSize="20"
+                    BorderThickness="0"
                     HorizontalContentAlignment="Center"
                     SelectionChanged="Volume1_SelectionChanged"
                     FontFamily="/Fonts/Poppins/#Poppins Bold"/>
@@ -94,14 +95,15 @@
                 </LinearGradientBrush>
             </Border.Background>
             <Border.Clip>
-                <RectangleGeometry RadiusX="0"
-                                RadiusY="0"
+                <RectangleGeometry RadiusX="5"
+                                RadiusY="5"
                                 Rect="0,0,500,30"/>
             </Border.Clip>
             <ComboBox ItemsSource="{Binding Controller.AvailableApps.Values}"
                     Name="volume2"
-                    Opacity="0.5"
-                    FontSize="22"
+                    Opacity="0.65"
+                    FontSize="20"
+                    BorderThickness="0"
                     HorizontalContentAlignment="Center"
                     SelectionChanged="Volume2_SelectionChanged"
                     FontFamily="/Fonts/Poppins/#Poppins Bold"/>
@@ -136,14 +138,15 @@
                 </LinearGradientBrush>
             </Border.Background>
             <Border.Clip>
-                <RectangleGeometry RadiusX="0"
-                                RadiusY="0"
+                <RectangleGeometry RadiusX="5"
+                                RadiusY="5"
                                 Rect="0,0,500,30"/>
             </Border.Clip>
             <ComboBox ItemsSource="{Binding Controller.AvailableApps.Values}"
                     Name="volume3"
-                    Opacity="0.5"
-                    FontSize="22"
+                    Opacity="0.65"
+                    FontSize="20"
+                    BorderThickness="0"
                     HorizontalContentAlignment="Center"
                     SelectionChanged="Volume3_SelectionChanged"
                     FontFamily="/Fonts/Poppins/#Poppins Bold"/>
@@ -178,14 +181,15 @@
                 </LinearGradientBrush>
             </Border.Background>
             <Border.Clip>
-                <RectangleGeometry RadiusX="0"
-                                RadiusY="0"
+                <RectangleGeometry RadiusX="5"
+                                RadiusY="5"
                                 Rect="0,0,500,30"/>
             </Border.Clip>
             <ComboBox ItemsSource="{Binding Controller.AvailableApps.Values}"
                     Name="volume4"
-                    Opacity="0.5"
-                    FontSize="22"
+                    Opacity="0.65"
+                    FontSize="20"
+                    BorderThickness="0"
                     HorizontalContentAlignment="Center"
                     SelectionChanged="Volume4_SelectionChanged"
                     FontFamily="/Fonts/Poppins/#Poppins Bold"/>
@@ -220,14 +224,15 @@
                 </LinearGradientBrush>
             </Border.Background>
             <Border.Clip>
-                <RectangleGeometry RadiusX="0"
-                                RadiusY="0"
+                <RectangleGeometry RadiusX="5"
+                                RadiusY="5"
                                 Rect="0,0,500,30"/>
             </Border.Clip>
             <ComboBox ItemsSource="{Binding Controller.AvailableApps.Values}"
                     Name="volume5"
-                    Opacity="0.5"
-                    FontSize="22"
+                    Opacity="0.65"
+                    FontSize="20"
+                    BorderThickness="0"
                     HorizontalContentAlignment="Center"
                     SelectionChanged="Volume5_SelectionChanged"
                     FontFamily="/Fonts/Poppins/#Poppins Bold"/>
