@@ -26,15 +26,17 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Volume Mixer"
+            <TextBlock Text="EzMixer"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Foreground="White"
                        Margin="0,0,0,0"
-                       FontSize="24"
-                       FontFamily="/Fonts/Poppins/#Poppins Medium"/>
+                       FontSize="26"
+                       FontFamily="/Fonts/Poppins/#Poppins SemiBold"/>
 
-            <StackPanel Grid.Row="1">
+            <StackPanel Grid.Row="1"
+                        
+                        >
 
                 <RadioButton Content="Home"
                              FontFamily="/Fonts/Poppins/#Poppins Medium"
@@ -72,7 +74,7 @@
                        Grid.Row="0"
                        Name="ViewTitle"
                        Foreground="White"
-                       FontSize="22"
+                       FontSize="24"
                        HorizontalAlignment="Left"
                        Margin="50,30,0,0"
                        FontFamily="/Fonts/Poppins/#Poppins Light"/>

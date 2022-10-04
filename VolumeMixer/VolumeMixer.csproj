@@ -26,6 +26,25 @@
     <None Remove="Assets\Images\mixericobig.png" />
     <None Remove="Assets\Images\mixerwhiteh.png" />
     <None Remove="Assets\Images\whiteknob.png" />
+    <None Remove="Fonts\Poppins\OFL.txt" />
+    <None Remove="Fonts\Poppins\Poppins-Black.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-BlackItalic.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-Bold.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-BoldItalic.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-ExtraBold.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-ExtraBoldItalic.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-ExtraLight.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-ExtraLightItalic.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-Italic.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-Light.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-LightItalic.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-Medium.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-MediumItalic.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-Regular.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-SemiBold.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-SemiBoldItalic.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-Thin.ttf" />
+    <None Remove="Fonts\Poppins\Poppins-ThinItalic.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +54,7 @@
   <ItemGroup>
     <PackageReference Include="AudioSwitcher.AudioApi.CoreAudio" Version="3.0.0.1" />
     <PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0404" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="20.3.0.47" />
     <PackageReference Include="System.IO.Ports" Version="6.0.0" />
     <PackageReference Include="System.Management" Version="6.0.0" />
   </ItemGroup>
@@ -59,6 +79,25 @@
     <Resource Include="Assets\Images\mixericobig.png" />
     <Resource Include="Assets\Images\mixerwhiteh.png" />
     <Resource Include="Assets\Images\whiteknob.png" />
+    <Resource Include="Fonts\Poppins\OFL.txt" />
+    <Resource Include="Fonts\Poppins\Poppins-Black.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-BlackItalic.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-Bold.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-BoldItalic.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-ExtraBold.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-ExtraLight.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-ExtraLightItalic.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-Italic.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-Light.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-LightItalic.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-Medium.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-MediumItalic.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-Regular.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-SemiBold.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-SemiBoldItalic.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-Thin.ttf" />
+    <Resource Include="Fonts\Poppins\Poppins-ThinItalic.ttf" />
   </ItemGroup>
 
 </Project>

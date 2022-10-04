@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="800">
 
-    <Grid Margin="30,0,30,30">
+    <Grid Margin="10,0,10,30">
         <Grid.RowDefinitions >
             <RowDefinition Height="10"/>
             <RowDefinition Height="250"/>
@@ -22,7 +22,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Border Width="720"
+        <Border Width="760"
             Height="140"
             Grid.Row="1" 
             Grid.Column="0"
@@ -130,6 +130,13 @@
                 Stroke="AliceBlue"/>
 
         </Canvas>
+
+        <mah:ToggleSwitch Grid.Column="2"
+                    Grid.Row="1"
+                    Margin="0,0,0,25"
+                    VerticalAlignment="Bottom"
+                    
+                    Foreground="White"/>
 
         <mah:ColorPicker
             Grid.Row="1"
@@ -247,33 +254,33 @@
 
         <mah:ToggleSwitch Grid.Column="0"
                     Grid.Row="2"
-                    Grid.ColumnSpan="2"
                           Header="Volume 1"
-                    Margin="-60,60,0,0"
+                    Margin="0,60,0,0"
+                    HorizontalContentAlignment="Center"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Center"
                     
                     Foreground="White"/>
 
-        <CheckBox Grid.Column="1"
-                  Grid.Row="2"
-                  Margin="0,60,0,0"
-                  VerticalAlignment="Top"
-                  HorizontalAlignment="Center"/>
+        <mah:ToggleSwitch Grid.Column="1"
+                    Grid.Row="2"
+                          Header="Volume 1"
+                    Margin="0,60,0,0"
+                    HorizontalContentAlignment="Center"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    
+                    Foreground="White"/>
+        <mah:ToggleSwitch Grid.Column="2"
+                    Grid.Row="2"
+                    Margin="0,60,0,0"
+                    HorizontalContentAlignment="Center"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    
+                    Foreground="White"/>
 
-        <CheckBox Grid.Column="2"
-                  Grid.Row="2"
-                  Margin="0,60,0,0"
-                  VerticalAlignment="Top"
-                  HorizontalAlignment="Center"/>
-
-        <CheckBox Grid.Column="3"
-                  Grid.Row="2"
-                  Margin="0,60,0,0"
-                  Checked="CheckBox_Checked"
-                  VerticalAlignment="Top"
-                  HorizontalAlignment="Center"
-                  Background="DarkGray"/>
+        
 
         <CheckBox Grid.Column="4"
                   Grid.Row="2"

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:local="clr-namespace:VolumeMixer.Views"
              mc:Ignorable="d" 
              d:DesignHeight="510" d:DesignWidth="800">
@@ -19,12 +20,40 @@
 
         <mah:ToggleSwitch Margin="100"
                             Height="50"
+                          HorizontalAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          TextBlock.TextAlignment="Left"
+                          
+                          VerticalContentAlignment="Center"
              Foreground="White"
                           TextBlock.FontSize="16"
-                          Background="AliceBlue"/>
+                          Background="#FF5EA6E6" Cursor="Arrow" VerticalAlignment="Center" Width="134" ContentDirection="RightToLeft"/>
+
+        <ToggleButton Height="50"
+                      Width="200"
+                      Content="Teste"
+            Style="{DynamicResource MetroCircleToggleButtonStyle}">
+            
+        </ToggleButton>
+
+        <syncfusion:ColorPicker Height="50"
+                                IsAlphaVisible="False"
+                                IsOpenGradientPropertyEditor="False"
+                                EnableSolidToGradientSwitch="False"
+                                IsColorPaletteVisible="True"
+                      Width="200">
+            
+        </syncfusion:ColorPicker>
+
+        <syncfusion:ButtonAdv Height="50"
+                         Width="200"
+                        Label="Log-in" SmallIcon="../Assets/Images/meterlessknob.png" 
+                              SizeMode="Normal" 
+                              IsCheckable="True" 
+                              IsChecked="False"/>
 
 
-        
+
 
     </StackPanel>
 </UserControl>

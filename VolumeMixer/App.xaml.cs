@@ -13,5 +13,9 @@ namespace VolumeMixer
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NzMwNzU4QDMyMzAyZTMzMmUzMG01WDI4NGNpMGhPZnBKeGZZR3ErQU0xNFE4cVFFVERYTTBsUU1Gc1NxQUk9");
+        }
     }
 }
