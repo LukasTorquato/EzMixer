@@ -21,7 +21,7 @@ namespace VolumeMixer
         {
             InitializeComponent();
             MView = new MainView();
-            LView = new LightingView();
+            LView = new LightingView(MView.Controller,MView.Hardware,MView.numSliders);
             PView = new PreferencesView();
             this.MainContentControl.Content = MView;
 

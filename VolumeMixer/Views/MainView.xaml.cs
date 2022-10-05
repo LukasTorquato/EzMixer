@@ -18,7 +18,7 @@ namespace VolumeMixer.Views
 
         private readonly string filename = "../../../../Config/config.json";
 
-        private readonly int numSliders = 5;
+        public readonly int numSliders = 5;
 
         private int sensibility = 2;
 
@@ -64,6 +64,7 @@ namespace VolumeMixer.Views
             {
                 if (Hardware.Connected)
                 {
+                    Hardware.UpdateLighting();
                     Thread thread = new Thread(new ThreadStart(UpdateVolumes));
                     thread.Start();
                     break;
@@ -123,6 +124,13 @@ namespace VolumeMixer.Views
                     string jsonString = File.ReadAllText(filename);
                     Dictionary<string, string[]> jsonDic = JsonSerializer.Deserialize<Dictionary<string, string[]>>(jsonString) ?? throw new ArgumentException();
                     Controller.LoadState(jsonDic);
+
+                    string message = "a5";
+                    for (int i = 0; i < numSliders; i++)
+                    {
+                        message += i + "=" + jsonDic[Constants.StateLighting][i] + "|";
+                    }
+                    Hardware.LightingCommand = message;
 
                     ComboLoad(jsonDic[Constants.StateNames]);
 

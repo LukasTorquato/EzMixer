@@ -34,9 +34,7 @@
                        FontSize="26"
                        FontFamily="/Fonts/Poppins/#Poppins SemiBold"/>
 
-            <StackPanel Grid.Row="1"
-                        
-                        >
+            <StackPanel Grid.Row="1">
 
                 <RadioButton Content="Home"
                              FontFamily="/Fonts/Poppins/#Poppins Medium"

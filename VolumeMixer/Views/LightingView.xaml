@@ -4,30 +4,47 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:local="clr-namespace:VolumeMixer.Views"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="800">
 
-    <Grid Margin="10,0,10,30">
+    <Grid Margin="10,0,10,30" HorizontalAlignment="Center">
         <Grid.RowDefinitions >
             <RowDefinition Height="10"/>
-            <RowDefinition Height="250"/>
+            <RowDefinition Height="240"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="140"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <Button Grid.Row="2"
+                Grid.Column="3"
+                Content="Apply"
+                Width="80"
+                Height="30"
+                Name="ApplyLighting_Button"
+                FontFamily="/Fonts/Poppins/#Poppins Medium"
+                Margin="0,0,0,20"
+                VerticalAlignment="Bottom"
+                Click="Apply_Lighting">
+            
+        </Button>
+        
         <Border Width="760"
             Height="140"
             Grid.Row="1" 
+            Margin="0,0,0,0"
             Grid.Column="0"
-            Grid.ColumnSpan="5"
-            BorderThickness="5"
+            Grid.ColumnSpan="7"
+            BorderThickness="8"
             CornerRadius="40"
             BorderBrush="DarkSlateGray">
         </Border>
@@ -35,25 +52,25 @@
 
         <!-- Volume 1 Controls Start-->
         <Canvas Grid.Row="1"
-            Grid.Column="0"
+            Grid.Column="1"
             VerticalAlignment="Center"
             Height="100"
             Width="100">
 
             <Image Source="/Assets/Images/meterlessknobh.png"
                 Height="100"/>
-            <Ellipse  Width="100"
-                Name = "Volume1Ring" 
+            <Ellipse  Name="Volume1Ring" 
+                Width="100"
                 Height="100"
                 Fill="Transparent"
-                StrokeThickness="5"
+                StrokeThickness="12"
                 Stroke="AliceBlue"/>
             
         </Canvas>
 
         <mah:ColorPicker
             Grid.Row="1"
-            Grid.Column="0"
+            Grid.Column="1"
             Height="20"
             Width="100"
             VerticalAlignment="Bottom"
@@ -73,7 +90,7 @@
 
         <!-- Volume 2 Controls Start-->
         <Canvas Grid.Row="1"
-            Grid.Column="1"
+            Grid.Column="2"
             VerticalAlignment="Center"
             Height="100"
             Width="100">
@@ -81,18 +98,18 @@
             <Image Source="/Assets/Images/meterlessknobh.png"
                 Height="100" 
                 Width="100"/>
-            <Ellipse  Width="100"
-                Name = "Volume2Ring" 
+            <Ellipse  Name="Volume2Ring" 
+                Width="100"
                 Height="100"
                 Fill="Transparent"
-                StrokeThickness="3"
+                StrokeThickness="12"
                 Stroke="AliceBlue"/>
 
         </Canvas>
 
         <mah:ColorPicker
             Grid.Row="1"
-            Grid.Column="1"
+            Grid.Column="2"
             Height="25"
             Width="100"
             VerticalAlignment="Bottom"
@@ -114,7 +131,7 @@
 
         <!-- Volume 3 Controls Start-->
         <Canvas Grid.Row="1"
-            Grid.Column="2"
+            Grid.Column="3"
             VerticalAlignment="Center"
             Height="100"
             Width="100">
@@ -122,25 +139,19 @@
             <Image Source="/Assets/Images/meterlessknobh.png"
                 Height="100" 
                 Width="100"/>
-            <Ellipse  Width="100"
-                Name = "Volume3Ring" 
+            <Ellipse  Name="Volume3Ring" 
+                Width="100"
                 Height="100"
                 Fill="Transparent"
-                StrokeThickness="3"
+                StrokeThickness="12"
                 Stroke="AliceBlue"/>
 
         </Canvas>
 
-        <mah:ToggleSwitch Grid.Column="2"
-                    Grid.Row="1"
-                    Margin="0,0,0,25"
-                    VerticalAlignment="Bottom"
-                    
-                    Foreground="White"/>
 
         <mah:ColorPicker
             Grid.Row="1"
-            Grid.Column="2"
+            Grid.Column="3"
             Height="25"
             Width="100"
             VerticalAlignment="Bottom"
@@ -162,7 +173,7 @@
 
         <!-- Volume 4 Controls Start-->
         <Canvas Grid.Row="1"
-            Grid.Column="3"
+            Grid.Column="4"
             VerticalAlignment="Center"
             Height="100"
             Width="100">
@@ -170,18 +181,18 @@
             <Image Source="/Assets/Images/meterlessknobh.png"
                 Height="100" 
                 Width="100"/>
-            <Ellipse  Width="100"
-                Name = "Volume4Ring" 
+            <Ellipse  Name="Volume4Ring" 
+                Width="100"
                 Height="100"
                 Fill="Transparent"
-                StrokeThickness="3"
+                StrokeThickness="12"
                 Stroke="AliceBlue"/>
 
         </Canvas>
 
         <mah:ColorPicker
             Grid.Row="1"
-            Grid.Column="3"
+            Grid.Column="4"
             Height="25"
             Width="100"
             VerticalAlignment="Bottom"
@@ -201,7 +212,7 @@
 
         <!-- Volume 5 Controls Start-->
         <Canvas Grid.Row="1"
-            Grid.Column="4"
+            Grid.Column="5"
             VerticalAlignment="Center"
             Height="100"
             Width="100">
@@ -209,18 +220,18 @@
             <Image Source="/Assets/Images/meterlessknobh.png"
                 Height="100" 
                 Width="100"/>
-            <Ellipse  Width="100"
-                Name = "Volume5Ring" 
+            <Ellipse  Name="Volume5Ring" 
+                Width="100"
                 Height="100"
                 Fill="Transparent"
-                StrokeThickness="3"
+                StrokeThickness="12"
                 Stroke="AliceBlue"/>
 
         </Canvas>
 
         <mah:ColorPicker
             Grid.Row="1"
-            Grid.Column="4"
+            Grid.Column="5"
             Height="25"
             Width="100"
             VerticalAlignment="Bottom"
@@ -242,50 +253,80 @@
         
         <TextBlock Text="Volume Binding"
                 Grid.Row="2"
+                Grid.Column="1"
                 Grid.ColumnSpan="2"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
                 Foreground="White"
-                Margin="50,20,0,0"
+                Margin="50,40,0,0"
                 FontSize="20"
                 FontFamily="/Fonts/Poppins/#Poppins Light"/>
 
-        
 
-        <mah:ToggleSwitch Grid.Column="0"
-                    Grid.Row="2"
-                          Header="Volume 1"
-                    Margin="0,60,0,0"
-                    HorizontalContentAlignment="Center"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Center"
-                    
-                    Foreground="White"/>
+        <Border Width="700"
+                Height="2"
+                VerticalAlignment="Top"
+                Margin="0,75,0,0"
+                Grid.Row="2" 
+                Grid.Column="1"
+                Grid.ColumnSpan="5">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                    <GradientStop Color="DarkCyan" Offset="0.0"/>
+                    <GradientStop Color="#272537" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.Clip>
+                <RectangleGeometry RadiusX="10"
+                                RadiusY="10"
+                                Rect="0,0,700,2"/>
+            </Border.Clip>
+        </Border>
 
-        <mah:ToggleSwitch Grid.Column="1"
-                    Grid.Row="2"
-                          Header="Volume 1"
-                    Margin="0,60,0,0"
-                    HorizontalContentAlignment="Center"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Center"
-                    
-                    Foreground="White"/>
-        <mah:ToggleSwitch Grid.Column="2"
-                    Grid.Row="2"
-                    Margin="0,60,0,0"
-                    HorizontalContentAlignment="Center"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Center"
-                    
-                    Foreground="White"/>
 
-        
+        <CheckBox Grid.Column="1"
+                  Grid.Row="2"
+                  Name="Volume1_Checkbox"
+                  IsChecked="False"
+                  Checked="CheckBox_Checked"
+                  Unchecked="CheckBox_Checked"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"/>
+
+        <CheckBox Grid.Column="2"
+                  Grid.Row="2"
+                  Name="Volume2_Checkbox"
+                  IsChecked="False"
+                  Checked="CheckBox_Checked"
+                  Unchecked="CheckBox_Checked"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"/>
+
+        <CheckBox Grid.Column="3"
+                  Grid.Row="2"
+                  Name="Volume3_Checkbox"
+                  IsChecked="False"
+                  Checked="CheckBox_Checked"
+                  Unchecked="CheckBox_Checked"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"/>
 
         <CheckBox Grid.Column="4"
                   Grid.Row="2"
-                  Margin="0,60,0,0"
-                  VerticalAlignment="Top"
+                  Name="Volume4_Checkbox"
+                  IsChecked="False"
+                  Checked="CheckBox_Checked"
+                  Unchecked="CheckBox_Checked"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"/>
+
+        <CheckBox Grid.Column="5"
+                  Grid.Row="2"
+                  Name="Volume5_Checkbox"
+                  IsChecked="False"
+                  Checked="CheckBox_Checked"
+                  Unchecked="CheckBox_Checked"
+                  VerticalAlignment="Center"
                   HorizontalAlignment="Center"/>
     </Grid>
 </UserControl>
