@@ -20,6 +20,8 @@ namespace VolumeMixer
 
         public const string StateLighting = "selectedLighting";
 
+        public const string FileLocation = "config.json";
+
         public const string StockLighting = "a50=FFFFFF*|1=FFFFFF*|2=FFFFFF*|3=FFFFFF*|4=FFFFFF*|";
 
         public const string RegPattern = @"^(\d{1,4}[|]\d{1,4}[|\s]\d{1,4}[|\s]\d{1,4})([|\s]\d{1,4})?$";

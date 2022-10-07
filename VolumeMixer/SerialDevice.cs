@@ -90,11 +90,9 @@ namespace VolumeMixer
         
         public void UpdateLighting()
         {
-            //color = 255,0,255* -> a0-255,0,255*
             try
             {
                 device.DiscardOutBuffer();
-                Debug.WriteLine("Message: "+ LightingCommand);
                 device.WriteLine(LightingCommand);
             }
             catch (Exception ex)

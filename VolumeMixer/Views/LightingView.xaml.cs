@@ -1,7 +1,9 @@
 ﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Windows;
@@ -15,7 +17,7 @@ namespace VolumeMixer.Views
     /// </summary>
     public partial class LightingView : UserControl
     {
-        private readonly string filename = "../../../../Config/config.json";
+        private readonly string filename = Constants.FileLocation;
 
         private string[] StagedLighting;
 
@@ -35,19 +37,21 @@ namespace VolumeMixer.Views
 
             Controller.GetState()[Constants.StateLighting].CopyTo(StagedLighting, 0);
 
-            CheckBoxLoad();
-            //Thread.Sleep(2000);
-            ComboLoad();
+            if (File.Exists(filename))
+            {
+                CheckBoxLoad();
+                ComboLoad();
+            }
 
         }
 
         private void CheckBoxLoad()
-        {
+        {   
             this.Dispatcher.Invoke(() =>
             {
-                if(StagedLighting[0].Contains("*"))
+                if (StagedLighting[0].Contains("*"))
                     Volume1_Checkbox.IsChecked = true;
-                if(StagedLighting[1].Contains("*"))
+                if (StagedLighting[1].Contains("*"))
                     Volume2_Checkbox.IsChecked = true;
                 if (StagedLighting[2].Contains("*"))
                     Volume3_Checkbox.IsChecked = true;
@@ -69,14 +73,6 @@ namespace VolumeMixer.Views
                 Volume5_ColorPicker.SelectedColor = (Color)ColorConverter.ConvertFromString("#" + StagedLighting[4].Replace("*", "").Replace("-", ""));
             });
 
-            /*string message = "a5";
-            for (int i = 0; i < numSliders; i++)
-            {
-                message += i + "=" + StagedLighting[i] + "|";
-            }
-            Hardware.LightingCommand = message;
-            Hardware.UpdateLighting();*/
-
         }
 
         private void SaveState()
@@ -88,80 +84,82 @@ namespace VolumeMixer.Views
 
         private void Volume_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
-
-            if (e.Source == Volume1_ColorPicker && Volume1_ColorPicker.SelectedColor != null)
+            try
             {
-                //Debug.WriteLine("Color 1: " + Volume1_ColorPicker.SelectedColor);
-                string colorstring = Volume1_ColorPicker.SelectedColor.ToString().Replace("#FF", ""); 
-                //Color color = (Color)ColorConverter.ConvertFromString(colorstring); 
+                if (e.Source == Volume1_ColorPicker && Volume1_ColorPicker.SelectedColor != null)
+                {
+                    string colorstring = Volume1_ColorPicker.SelectedColor.ToString().Replace("#FF", "") ?? throw new Exception();
 
-                var converter = new System.Windows.Media.BrushConverter();
-                Volume1Ring.Stroke = (Brush)converter.ConvertFromString("#"+colorstring);
+                    var converter = new System.Windows.Media.BrushConverter();
+                    Volume1Ring.Stroke = (Brush)converter.ConvertFromString("#" + colorstring);
 
-                StagedLighting[0] = colorstring;
-                if (Volume1_Checkbox.IsChecked == true)
-                    StagedLighting[0] += "*";
-                else
-                    StagedLighting[0] += "-";
+                    StagedLighting[0] = colorstring;
+                    if (Volume1_Checkbox.IsChecked == true)
+                        StagedLighting[0] += "*";
+                    else
+                        StagedLighting[0] += "-";
 
-                //Debug.WriteLine("Color RGB: " + StagedLighting[0]);
+                }
+                else if (e.Source == Volume2_ColorPicker && Volume2_ColorPicker.SelectedColor != null)
+                {
+                    string colorstring = Volume2_ColorPicker.SelectedColor.ToString().Replace("#FF", "") ?? throw new Exception();
 
-            } 
-            else if (e.Source == Volume2_ColorPicker && Volume2_ColorPicker.SelectedColor != null)
-            {
-                string colorstring = Volume2_ColorPicker.SelectedColor.ToString().Replace("#FF", "");
+                    var converter = new System.Windows.Media.BrushConverter();
+                    Volume2Ring.Stroke = (Brush)converter.ConvertFromString("#" + colorstring);
 
-                var converter = new System.Windows.Media.BrushConverter();
-                Volume2Ring.Stroke = (Brush)converter.ConvertFromString("#" + colorstring);
+                    StagedLighting[1] = colorstring;
+                    if (Volume2_Checkbox.IsChecked == true)
+                        StagedLighting[1] += "*";
+                    else
+                        StagedLighting[1] += "-";
 
-                StagedLighting[1] = colorstring;
-                if (Volume2_Checkbox.IsChecked == true)
-                    StagedLighting[1] += "*";
-                else
-                    StagedLighting[1] += "-";
+                }
+                else if (e.Source == Volume3_ColorPicker && Volume3_ColorPicker.SelectedColor != null)
+                {
+                    string colorstring = Volume3_ColorPicker.SelectedColor.ToString().Replace("#FF", "") ?? throw new Exception();
 
+                    var converter = new System.Windows.Media.BrushConverter();
+                    Volume3Ring.Stroke = (Brush)converter.ConvertFromString("#" + colorstring);
+
+                    StagedLighting[2] = colorstring;
+                    if (Volume3_Checkbox.IsChecked == true)
+                        StagedLighting[2] += "*";
+                    else
+                        StagedLighting[2] += "-";
+
+                }
+                else if (e.Source == Volume4_ColorPicker && Volume4_ColorPicker.SelectedColor != null)
+                {
+                    string colorstring = Volume4_ColorPicker.SelectedColor.ToString().Replace("#FF", "") ?? throw new Exception();
+
+                    var converter = new System.Windows.Media.BrushConverter();
+                    Volume4Ring.Stroke = (Brush)converter.ConvertFromString("#" + colorstring);
+
+                    StagedLighting[3] = colorstring;
+                    if (Volume4_Checkbox.IsChecked == true)
+                        StagedLighting[3] += "*";
+                    else
+                        StagedLighting[3] += "-";
+
+                }
+                else if (e.Source == Volume5_ColorPicker && Volume5_ColorPicker.SelectedColor != null)
+                {
+                    string colorstring = Volume5_ColorPicker.SelectedColor.ToString().Replace("#FF", "") ?? throw new Exception();
+
+                    var converter = new System.Windows.Media.BrushConverter();
+                    Volume5Ring.Stroke = (Brush)converter.ConvertFromString("#" + colorstring);
+
+                    StagedLighting[4] = colorstring;
+                    if (Volume5_Checkbox.IsChecked == true)
+                        StagedLighting[4] += "*";
+                    else
+                        StagedLighting[4] += "-";
+
+                }
             }
-            else if (e.Source == Volume3_ColorPicker && Volume3_ColorPicker.SelectedColor != null)
+            catch (Exception ex)
             {
-                string colorstring = Volume3_ColorPicker.SelectedColor.ToString().Replace("#FF", "");
-
-                var converter = new System.Windows.Media.BrushConverter();
-                Volume3Ring.Stroke = (Brush)converter.ConvertFromString("#" + colorstring);
-
-                StagedLighting[2] = colorstring;
-                if (Volume3_Checkbox.IsChecked == true)
-                    StagedLighting[2] += "*";
-                else
-                    StagedLighting[2] += "-";
-
-            }
-            else if (e.Source == Volume4_ColorPicker && Volume4_ColorPicker.SelectedColor != null)
-            {
-                string colorstring = Volume4_ColorPicker.SelectedColor.ToString().Replace("#FF", "");
-
-                var converter = new System.Windows.Media.BrushConverter();
-                Volume4Ring.Stroke = (Brush)converter.ConvertFromString("#" + colorstring);
-
-                StagedLighting[3] = colorstring;
-                if (Volume4_Checkbox.IsChecked == true)
-                    StagedLighting[3] += "*";
-                else
-                    StagedLighting[3] += "-";
-
-            }
-            else if (e.Source == Volume5_ColorPicker && Volume5_ColorPicker.SelectedColor != null)
-            {
-                string colorstring = Volume5_ColorPicker.SelectedColor.ToString().Replace("#FF", "");
-
-                var converter = new System.Windows.Media.BrushConverter();
-                Volume5Ring.Stroke = (Brush)converter.ConvertFromString("#" + colorstring);
-
-                StagedLighting[4] = colorstring;
-                if (Volume5_Checkbox.IsChecked == true)
-                    StagedLighting[4] += "*";
-                else
-                    StagedLighting[4] += "-";
-
+                MessageBox.Show("Error: " + ex.Message);
             }
 
         }

@@ -63,7 +63,7 @@
                     BorderThickness="0"
                     VerticalContentAlignment="Top"
                     HorizontalContentAlignment="Center"
-                    SelectionChanged="Volume1_SelectionChanged"
+                    SelectionChanged="Session_SelectionChanged"
                     FontFamily="/Fonts/Poppins/#Poppins Medium"/>
         </Border>
     <!-- End Volume Group 1-->
@@ -108,7 +108,7 @@
                       
                     VerticalContentAlignment="Top"
                     HorizontalContentAlignment="Center"
-                    SelectionChanged="Volume2_SelectionChanged"
+                    SelectionChanged="Session_SelectionChanged"
                     FontFamily="/Fonts/Poppins/#Poppins Medium"/>
         </Border>
     <!-- End Volume Group 2-->
@@ -151,7 +151,7 @@
                     FontSize="20"
                     BorderThickness="0"
                     HorizontalContentAlignment="Center"
-                    SelectionChanged="Volume3_SelectionChanged"
+                    SelectionChanged="Session_SelectionChanged"
                     FontFamily="/Fonts/Poppins/#Poppins Medium"/>
         </Border>
     <!-- End Volume Group 3-->
@@ -194,7 +194,7 @@
                     FontSize="20"
                     BorderThickness="0"
                     HorizontalContentAlignment="Center"
-                    SelectionChanged="Volume4_SelectionChanged"
+                    SelectionChanged="Session_SelectionChanged"
                     FontFamily="/Fonts/Poppins/#Poppins Medium"/>
         </Border>
     <!-- End Volume Group 4-->
@@ -237,7 +237,7 @@
                     FontSize="20"
                     BorderThickness="0"
                     HorizontalContentAlignment="Center"
-                    SelectionChanged="Volume5_SelectionChanged"
+                    SelectionChanged="Session_SelectionChanged"
                     FontFamily="/Fonts/Poppins/#Poppins Medium"/>
         </Border>
     <!-- End Volume Group 5 -->

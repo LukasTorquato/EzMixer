@@ -16,7 +16,9 @@ namespace VolumeMixer.Views
     public partial class MainView : UserControl
     {
 
-        private readonly string filename = "../../../../Config/config.json";
+
+
+        private readonly string filename = Constants.FileLocation;
 
         public readonly int numSliders = 5;
 
@@ -123,13 +125,17 @@ namespace VolumeMixer.Views
                 {
                     string jsonString = File.ReadAllText(filename);
                     Dictionary<string, string[]> jsonDic = JsonSerializer.Deserialize<Dictionary<string, string[]>>(jsonString) ?? throw new ArgumentException();
-                    Controller.LoadState(jsonDic);
-
+                    
                     string message = "a5";
                     for (int i = 0; i < numSliders; i++)
                     {
+                        if (jsonDic[Constants.StateLighting][i] == null)
+                            jsonDic[Constants.StateLighting][i] = "FFFFFF*";
+                        
                         message += i + "=" + jsonDic[Constants.StateLighting][i] + "|";
                     }
+
+                    Controller.LoadState(jsonDic);
                     Hardware.LightingCommand = message;
 
                     ComboLoad(jsonDic[Constants.StateNames]);
@@ -166,102 +172,43 @@ namespace VolumeMixer.Views
             });
         }
 
-        private void Volume1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Session_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                if (!(volume1.SelectedItem is null))
+                if (e.Source == volume1 && volume1.SelectedItem != null)
                 {
                     string appName = Convert.ToString(volume1.SelectedItem) ?? throw new Exception();
                     Controller.UpdateAudioSession(0, appName);
-                }
-
-                SaveState();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-
-        }
-
-        private void Volume2_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                if (!(volume2.SelectedItem is null))
+                } 
+                else if (e.Source == volume2 && volume2.SelectedItem != null)
                 {
                     string appName = Convert.ToString(volume2.SelectedItem) ?? throw new Exception();
                     Controller.UpdateAudioSession(1, appName);
-
                 }
-
-                SaveState();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-        private void Volume3_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                if (!(volume3.SelectedItem is null))
+                else if (e.Source == volume3 && volume3.SelectedItem != null)
                 {
                     string appName = Convert.ToString(volume3.SelectedItem) ?? throw new Exception();
                     Controller.UpdateAudioSession(2, appName);
-
                 }
-
-                SaveState();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-        private void Volume4_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                if (!(volume4.SelectedItem is null))
+                else if (e.Source == volume4 && volume4.SelectedItem != null)
                 {
                     string appName = Convert.ToString(volume4.SelectedItem) ?? throw new Exception();
                     Controller.UpdateAudioSession(3, appName);
-
                 }
-
-                SaveState();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-        private void Volume5_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                if (!(volume5.SelectedItem is null))
+                else if (e.Source == volume5 && volume5.SelectedItem != null)
                 {
                     string appName = Convert.ToString(volume5.SelectedItem) ?? throw new Exception();
                     Controller.UpdateAudioSession(4, appName);
-
                 }
 
                 SaveState();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-
     }
 }
