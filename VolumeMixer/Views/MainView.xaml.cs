@@ -138,8 +138,8 @@ namespace VolumeMixer.Views
                     Controller.LoadState(jsonDic);
                     Hardware.LightingCommand = message;
 
-                    ComboLoad(jsonDic[Constants.StateNames]);
-
+                    //ComboLoad(jsonDic[Constants.StateNames]);
+                    ComboLoad();
                 }
             }
             catch (Exception ex)
@@ -148,15 +148,15 @@ namespace VolumeMixer.Views
             }
         }
 
-        public void ComboLoad(string[] selectedAppNames)
+        public void ComboLoad()
         {
             this.Dispatcher.Invoke(() =>
             {
-                volume1.SelectedItem = selectedAppNames[0];
-                volume2.SelectedItem = selectedAppNames[1];
-                volume3.SelectedItem = selectedAppNames[2];
-                volume4.SelectedItem = selectedAppNames[3];
-                volume5.SelectedItem = selectedAppNames[4];
+                volume1.SelectedItem = Controller.GetState()[Constants.StateNames][0];
+                volume2.SelectedItem = Controller.GetState()[Constants.StateNames][1];
+                volume3.SelectedItem = Controller.GetState()[Constants.StateNames][2];
+                volume4.SelectedItem = Controller.GetState()[Constants.StateNames][3];
+                volume5.SelectedItem = Controller.GetState()[Constants.StateNames][4];
             });
         }
 

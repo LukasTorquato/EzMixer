@@ -60,10 +60,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Config\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Assets\Icons\mixerico.ico" />
     <Resource Include="Assets\Icons\mixericob.ico" />
     <Resource Include="Assets\Icons\mixericobig.ico" />
