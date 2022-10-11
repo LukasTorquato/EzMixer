@@ -1,4 +1,5 @@
 ﻿using AudioSwitcher.AudioApi.Session;
+using Syncfusion.Windows.Shared;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,10 +30,17 @@ namespace VolumeMixer
 
         public void OnNext(AudioSwitcher.AudioApi.DeviceChangedArgs value)
         {
-            view.Controller.UpdateCurrentDevice();
-            view.Controller.SetSessionObserver(view.SCWatcher);
-            view.Controller.SetSessionDObserver(view.SDWatcher);
-            view.LoadState();
+            
+            if (value.Device.IsDefaultDevice == true && value.ChangedType.ToString() == "DefaultChanged")
+            {
+                view.Controller.UpdateCurrentDevice();
+                view.Controller.SetSessionObserver(view.SCWatcher);
+                view.Controller.SetSessionDObserver(view.SDWatcher);
+            }
+            else if(value.ChangedType.ToString() == "StateChanged")
+            {
+                view.Controller.UpdatePlaybackDevices();
+            }
         }
     }
 }

@@ -16,8 +16,6 @@ namespace VolumeMixer.Views
     public partial class MainView : UserControl
     {
 
-
-
         private readonly string filename = Constants.FileLocation;
 
         public readonly int numSliders = 5;
@@ -144,7 +142,7 @@ namespace VolumeMixer.Views
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Exception: " + ex.Message);
+                Debug.WriteLine("Exception on LoadState(): " + ex.Message);
             }
         }
 

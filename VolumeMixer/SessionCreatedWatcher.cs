@@ -29,15 +29,17 @@ namespace VolumeMixer
         {
             string pname = Process.GetProcessById(value.ProcessId).ProcessName;
 
+            // New app added to windows mixer
             if (!view.Controller.AvailableApps.ContainsKey(pname))
             {
-                if(value.DisplayName == "")
+                if (value.DisplayName == "")
                     view.Controller.AvailableApps[pname] = pname;
                 else
                     view.Controller.AvailableApps[pname] = value.DisplayName;
 
                 view.ComboRefresh();
             }
+            //New app added to windows mixer and is previously selected by any combobox
             else
             {
                 string[] selectedAppKeys = view.Controller.GetState()[Constants.StateKeys];

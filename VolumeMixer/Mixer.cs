@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace VolumeMixer
@@ -14,15 +15,17 @@ namespace VolumeMixer
     public class Mixer
     {
         //guarda o dispositivo de reprodução atual
-        private CoreAudioDevice CurrentPlaybackDevice { get; set; }
+        private List<CoreAudioDevice> PlaybackDevices { get; set; }
+        private CoreAudioDevice CurrentPlaybackDevice;
         //guarda o dispositivo de Mic
-        private CoreAudioDevice CurrentRecordDevice { get; set; }
+        //private List<CoreAudioDevice> RecordDevices { get; set; }
+        private CoreAudioDevice CurrentRecordDevice;
 
         //dic para salvar e carregar os Apps escolhidos e a iluminação de cada controle
         private Dictionary<string, string[]> state;
 
         //array que guarda as sessions do mixer
-        private IAudioSession[] audioSessions;
+        private List<IAudioSession>[] audioSessions;
 
         //int para marcar o controle que comanda o master volume
         private int masterAssignedPosition;
@@ -38,24 +41,35 @@ namespace VolumeMixer
         //função para atualizar os dispositivos de playback e record atuais
         public void UpdateCurrentDevice()
         {
-            CurrentPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
-            CurrentRecordDevice = new CoreAudioController().DefaultCaptureDevice;
-            audioSessions = new IAudioSession[numSliders];
+            CoreAudioController controller = new CoreAudioController();
+            CurrentPlaybackDevice = controller.DefaultPlaybackDevice;
+            CurrentRecordDevice = controller.DefaultCaptureDevice;
+        }
+
+        public void UpdatePlaybackDevices()
+        {
+            CoreAudioController controller = new CoreAudioController();
+            PlaybackDevices.Clear();
+            foreach (var device in controller.GetDevices())
+            {
+                if (device.State.ToString() == "Active" && device.IsPlaybackDevice == true)
+                    PlaybackDevices.Add(device);
+            }
         }
 
         //função para atualizar a session para um determinado controle
         public void UpdateAudioSession(int pos, string name)
         {
+            audioSessions[pos].Clear();
+
             if (name == Constants.Master)
             {
                 //Deixa a posição "pos" nula no array de audioSessions
-                Array.Clear(audioSessions,pos,1);
                 masterAssignedPosition = pos;
                 state[Constants.StateKeys][pos] = state[Constants.StateNames][pos] = Constants.Master;
             }
             else if (name == Constants.Mic)
             {
-                Array.Clear(audioSessions, pos, 1);
                 micAssignedPosition = pos;
                 state[Constants.StateKeys][pos] = state[Constants.StateNames][pos] = Constants.Mic;
             }
@@ -67,27 +81,29 @@ namespace VolumeMixer
                     micAssignedPosition = -1;
 
                 string pname;
-
-                foreach (var session in CurrentPlaybackDevice.SessionController)
+                foreach (var device in PlaybackDevices)
                 {
-                    pname = Process.GetProcessById(session.ProcessId).ProcessName;
-
-                    if (pname == name || session.DisplayName == name)
+                    foreach (var session in device.SessionController)
                     {
-                        audioSessions[pos] = session;
-                        state[Constants.StateKeys][pos] = pname;
-                        state[Constants.StateNames][pos] = name;
-                    }
-                    else if (name == Constants.SysSounds && session.DisplayName.Contains("System32"))
-                    {
-                        audioSessions[pos] = session;
-                        state[Constants.StateKeys][pos] = pname;
-                        state[Constants.StateNames][pos] = name;
-                    }
-                    else if(AvailableApps.ContainsValue(name))
-                    {
-                        state[Constants.StateKeys][pos] = AvailableApps.FirstOrDefault(x => x.Value == name).Key;
-                        state[Constants.StateNames][pos] = name;
+                        pname = Process.GetProcessById(session.ProcessId).ProcessName;
+                        //Debug.WriteLine(pname);
+                        if (pname == name || session.DisplayName == name)
+                        {
+                            audioSessions[pos].Add(session);
+                            state[Constants.StateKeys][pos] = pname;
+                            state[Constants.StateNames][pos] = name;
+                        }
+                        else if (name == Constants.SysSounds && session.DisplayName.Contains("System32"))
+                        {
+                            audioSessions[pos].Add(session);
+                            state[Constants.StateKeys][pos] = pname;
+                            state[Constants.StateNames][pos] = name;
+                        }
+                        else if (AvailableApps.ContainsValue(name))
+                        {
+                            state[Constants.StateKeys][pos] = AvailableApps.FirstOrDefault(x => x.Value == name).Key;
+                            state[Constants.StateNames][pos] = name;
+                        }
                     }
                 }
             }
@@ -108,7 +124,7 @@ namespace VolumeMixer
             else if (micAssignedPosition == pos)
                 return CurrentRecordDevice.Volume;
             else if(audioSessions[pos] != null)
-                return audioSessions[pos].Volume;
+                return audioSessions[pos].First().Volume;
             else
                 return 0;
         }
@@ -118,10 +134,13 @@ namespace VolumeMixer
         {
             if (masterAssignedPosition == pos)
                 CurrentPlaybackDevice.Volume = vol;
-            else if(micAssignedPosition == pos)
+            else if (micAssignedPosition == pos)
                 CurrentRecordDevice.Volume = vol;
-            else if(audioSessions[pos] != null)
-                audioSessions[pos].Volume = vol;
+            else if (audioSessions[pos] != null)
+            {
+                foreach (var session in audioSessions[pos])
+                    session.Volume = vol;
+            }
                 
         }
 
@@ -141,6 +160,8 @@ namespace VolumeMixer
                 {
                     if (session.DisplayName.Contains("System32"))
                         AvailableApps[pname] = Constants.SysSounds;
+                    /*else if (pname == "Discord" && !AvailableApps.ContainsValue(Constants.DiscordAlias))
+                        AvailableApps[pname+session.ProcessId] = session.DisplayName + " Voice";*/
                     else
                         AvailableApps[pname] = session.DisplayName;
                 }
@@ -156,10 +177,14 @@ namespace VolumeMixer
 
             for (int i = 0; i < numSliders; i++)
             {
-                UpdateAudioSession(i, state[Constants.StateNames][i]);
-                if (AvailableApps.ContainsKey(state[Constants.StateKeys][i]) == false)
-                    AvailableApps[state[Constants.StateKeys][i]] = state[Constants.StateNames][i];
+                if (state[Constants.StateKeys][i] != null)
+                {
+                    UpdateAudioSession(i, state[Constants.StateNames][i]);
+                    if (AvailableApps.ContainsKey(state[Constants.StateKeys][i]) == false)
+                        AvailableApps[state[Constants.StateKeys][i]] = state[Constants.StateNames][i];
+                }
             }
+            
         }
 
         //função que retorna o estado atual do mixer
@@ -173,10 +198,28 @@ namespace VolumeMixer
             numSliders = _numSliders;
             masterAssignedPosition = -1;
             micAssignedPosition = -1;
+
+            CoreAudioController controller = new CoreAudioController();
             
-            CurrentPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
-            CurrentRecordDevice = new CoreAudioController().DefaultCaptureDevice;
-            audioSessions = new IAudioSession[numSliders];
+            CurrentPlaybackDevice = controller.DefaultPlaybackDevice;
+            CurrentRecordDevice = controller.DefaultCaptureDevice;
+
+            PlaybackDevices = new List<CoreAudioDevice>();
+            //RecordDevices = new List<CoreAudioDevice>();
+            foreach(var device in controller.GetDevices())
+            {
+                if (device.State.ToString() == "Active" && device.IsPlaybackDevice == true)
+                    PlaybackDevices.Add(device);
+                //else if (device.State.ToString() == "Active" && device.IsCaptureDevice == true)
+                    //RecordDevices.Add(device);
+
+            }
+
+            audioSessions = new List<IAudioSession>[numSliders];
+            for (int i = 0; i < numSliders; i++)
+            {
+                audioSessions[i] = new List<IAudioSession>();
+            }
             AvailableApps = new Dictionary<string, string>();
             StartAvailableApps();
 
