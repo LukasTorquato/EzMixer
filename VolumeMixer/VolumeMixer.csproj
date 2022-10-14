@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+	  <UseWindowsForms>true</UseWindowsForms>
 	<StartupObject>VolumeMixer.Program</StartupObject>
 	<Platforms>AnyCPU;x64</Platforms>
 	<ApplicationIcon>Assets\Icons\mixericobig.ico</ApplicationIcon>
@@ -45,10 +46,6 @@
     <None Remove="Fonts\Poppins\Poppins-SemiBoldItalic.ttf" />
     <None Remove="Fonts\Poppins\Poppins-Thin.ttf" />
     <None Remove="Fonts\Poppins\Poppins-ThinItalic.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Assets\Icons\mixericobig.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -94,6 +91,21 @@
     <Resource Include="Fonts\Poppins\Poppins-SemiBoldItalic.ttf" />
     <Resource Include="Fonts\Poppins\Poppins-Thin.ttf" />
     <Resource Include="Fonts\Poppins\Poppins-ThinItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

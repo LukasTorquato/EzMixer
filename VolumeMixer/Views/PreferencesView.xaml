@@ -8,52 +8,137 @@
              xmlns:local="clr-namespace:VolumeMixer.Views"
              mc:Ignorable="d" 
              d:DesignHeight="510" d:DesignWidth="800">
-    <StackPanel>
+    
+    <Grid Margin="100,0,100,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.35*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
         
-        <!--<xamlhost:WindowsXamlHost 
-                    x:Name="UIColorPicker"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    InitialTypeName="Windows.UI.Xaml.Controls.ColorPicker">
+        <!-- Windows Startup Start -->
+        <mah:ToggleSwitch Grid.Column="1"
+            Grid.Row="0"
+            HorizontalAlignment="Left"
+            Name="WinStartup_Toggle"
+            Content=""
+            Toggled="WinStartup_Toggled"/>
 
-        </xamlhost:WindowsXamlHost>-->
+        <TextBlock Grid.Column="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="White"
+            FontSize="16"
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
+            Text="Open with Windows Startup"/>
+        <!-- Windows Startup End -->
 
-        <mah:ToggleSwitch Margin="100"
-                            Height="50"
-                          HorizontalAlignment="Center"
-                          HorizontalContentAlignment="Center"
-                          TextBlock.TextAlignment="Left"
-                          
-                          VerticalContentAlignment="Center"
-             Foreground="White"
-                          TextBlock.FontSize="16"
-                          Background="#FF5EA6E6" Cursor="Arrow" VerticalAlignment="Center" Width="134" ContentDirection="RightToLeft"/>
+        <!-- Close to Tray Start -->
+        <mah:ToggleSwitch Grid.Column="1"
+            Grid.Row="1"
+            HorizontalAlignment="Left"
+            Content=""
+            Name="EOC_Toggle"
+            Toggled="CloseToTray_Toggled"/>
 
-        <ToggleButton Height="50"
-                      Width="200"
-                      Content="Teste"
-            Style="{DynamicResource MetroCircleToggleButtonStyle}">
+        <TextBlock Grid.Column="2"
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="White"
+            FontSize="16"
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
+            Text="Exit on Close"/>
+        <!-- Close to Tray End -->
+
             
-        </ToggleButton>
+        <!-- Close to Tray Start -->    
+        <mah:ToggleSwitch Grid.Column="1"
+            Grid.Row="2"
+            HorizontalAlignment="Left"
+            Content=""/>
 
-        <syncfusion:ColorPicker Height="50"
-                                IsAlphaVisible="False"
-                                IsOpenGradientPropertyEditor="False"
-                                EnableSolidToGradientSwitch="False"
-                                IsColorPaletteVisible="True"
-                      Width="200">
+        <TextBlock Grid.Column="2"
+            Grid.Row="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="White"
+            FontSize="16"
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
+            Text="Lorem Ipsum"/>
+        <!-- Close to Tray End -->
             
-        </syncfusion:ColorPicker>
+            
+        <!-- Polling Rate Start -->    
+        <Slider Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="10,0,10,0"
+                Name="PollingRate_Slider"
+                TickPlacement="TopLeft"
+                IsSnapToTickEnabled="True"
+                ValueChanged="PollingRate_Changed"
+                TickFrequency="50"
+                Maximum="150"
+                Minimum="50"/>
 
-        <syncfusion:ButtonAdv Height="50"
-                         Width="200"
-                        Label="Log-in" SmallIcon="../Assets/Images/meterlessknob.png" 
-                              SizeMode="Normal" 
-                              IsCheckable="True" 
-                              IsChecked="False"/>
+        <TextBlock Grid.Column="0"
+            Grid.Row="3"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Foreground="White"
+            FontSize="16"
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
+            Text="50"/>
 
+        <TextBlock Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Grid.Row="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Foreground="White"
+            FontSize="16"
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
+            Text="100"/>
 
+        <TextBlock Grid.Column="1"
+            Grid.Row="3"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Foreground="White"
+            FontSize="16"
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
+            Text="150"/>
 
+        <TextBlock Grid.Column="2"
+            Grid.Row="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="White"
+            FontSize="16"
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
+            Text="Report Rate (Per Second)"/>
 
-    </StackPanel>
+        <TextBlock Grid.Column="2"
+            Grid.Row="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Foreground="White"
+            TextAlignment="Center"
+            FontSize="8"
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight">
+            Higher: Less delay, more CPU usage.<LineBreak/>
+            Lower: More delay, less CPU usage.
+        </TextBlock>
+            
+        <!-- Polling Rate End -->  
+
+    </Grid>
 </UserControl>

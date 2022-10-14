@@ -16,8 +16,6 @@ namespace VolumeMixer.Views
     public partial class MainView : UserControl
     {
 
-        private readonly string filename = Constants.FileLocation;
-
         public readonly int numSliders = 5;
 
         private int sensibility = 2;
@@ -54,8 +52,9 @@ namespace VolumeMixer.Views
             Mixer.SetDeviceObserver(DeviceWatcher);
             LoadState();
 
-            Thread thread = new Thread(new ThreadStart(WaitForDevice));
-            thread.Start();
+            Thread waitThread = new Thread(new ThreadStart(WaitForDevice));
+            waitThread.IsBackground = true;
+            waitThread.Start();
         }
 
         private void WaitForDevice()
@@ -65,8 +64,9 @@ namespace VolumeMixer.Views
                 if (Hardware.Connected)
                 {
                     Hardware.UpdateLighting();
-                    Thread thread = new Thread(new ThreadStart(UpdateVolumes));
-                    thread.Start();
+                    Thread updateVolThread = new Thread(new ThreadStart(UpdateVolumes));
+                    updateVolThread.IsBackground = true;
+                    updateVolThread.Start();
                     break;
                 }
                 else
@@ -101,8 +101,9 @@ namespace VolumeMixer.Views
                 catch (Exception ex)
                 {
                     Debug.WriteLine("Error on UpdateVolume(): " + ex.Message);
-                    Thread thread = new Thread(new ThreadStart(WaitForDevice));
-                    thread.Start();
+                    Thread waitThread = new Thread(new ThreadStart(WaitForDevice));
+                    waitThread.IsBackground = true;
+                    waitThread.Start();
                     break;
                 }
             }
@@ -112,16 +113,16 @@ namespace VolumeMixer.Views
         {
             Dictionary<string, string[]> jsonDictionary = Controller.GetState();
             string jsonString = JsonSerializer.Serialize(jsonDictionary);
-            File.WriteAllText(filename, jsonString);
+            File.WriteAllText(Constants.FileLocation, jsonString);
         }
 
         public void LoadState()
         {
             try
             {
-                if (File.Exists(filename))
+                if (File.Exists(Constants.FileLocation))
                 {
-                    string jsonString = File.ReadAllText(filename);
+                    string jsonString = File.ReadAllText(Constants.FileLocation);
                     Dictionary<string, string[]> jsonDic = JsonSerializer.Deserialize<Dictionary<string, string[]>>(jsonString) ?? throw new ArgumentException();
                     
                     string message = "a5";

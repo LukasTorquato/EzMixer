@@ -1,14 +1,8 @@
 ﻿using AudioSwitcher.AudioApi.CoreAudio;
-using AudioSwitcher.AudioApi.Observables;
 using AudioSwitcher.AudioApi.Session;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text.RegularExpressions;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace VolumeMixer
 {
@@ -16,6 +10,7 @@ namespace VolumeMixer
     {
         //guarda o dispositivo de reprodução atual
         private List<CoreAudioDevice> PlaybackDevices { get; set; }
+
         private CoreAudioDevice CurrentPlaybackDevice;
         //guarda o dispositivo de Mic
         //private List<CoreAudioDevice> RecordDevices { get; set; }
@@ -206,6 +201,7 @@ namespace VolumeMixer
 
             PlaybackDevices = new List<CoreAudioDevice>();
             //RecordDevices = new List<CoreAudioDevice>();
+
             foreach(var device in controller.GetDevices())
             {
                 if (device.State.ToString() == "Active" && device.IsPlaybackDevice == true)

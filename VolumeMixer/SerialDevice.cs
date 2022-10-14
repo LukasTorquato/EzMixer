@@ -21,8 +21,6 @@ namespace VolumeMixer
         public string LightingCommand { get; set; }
 
         private readonly int numSliders;
-        //Regex para leitura do mixer de 4 e 5 volumes
-        //private readonly string pattern = @"^(\d{1,4}[|]\d{1,4}[|\s]\d{1,4}[|\s]\d{1,4})([|\s]\d{1,4})?$";
 
         public void ScanDevicePort()
         {
@@ -38,11 +36,11 @@ namespace VolumeMixer
                         ClearInBuffer();
                         Thread.Sleep(10);
                         string testread = device.ReadLine().Replace("\n", "").Replace("\r", "");
-                        Debug.WriteLine("Test Read: " + testread);
+                        //Debug.WriteLine("Test Read: " + testread);
                         if (!(testread is null))
                         {
                             bool portfound = Regex.IsMatch(testread, Constants.RegPattern);
-                            Debug.WriteLine("Regex: " + portfound);
+                            //Debug.WriteLine("Regex: " + portfound);
                             if (portfound)
                             {
                                 Connected = true;
