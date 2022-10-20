@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VolumeMixer
+namespace EzMixer
 {
     public class Program
     {
         [System.STAThreadAttribute()]
         public static void Main()
         {
-            var mainApp = new VolumeMixer.App();
+            var mainApp = new EzMixer.App();
             mainApp.InitializeComponent();
             mainApp.Run();
         }

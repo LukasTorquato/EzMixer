@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="VolumeMixer.Views.MainView"
+﻿<UserControl x:Class="EzMixer.Views.MainView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:VolumeMixer.Views"
+             xmlns:local="clr-namespace:EzMixer.Views"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="790">
     
@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
 
     <!-- Start Volume Group 1-->
-        <!-- pack://application:,,,/VolumeMixer;component-->
+        <!-- pack://application:,,,/EzMixer;component-->
         <Image Grid.Row="0"
             Grid.Column="0" 
             Source="/Assets/Images/coloredknob.png"

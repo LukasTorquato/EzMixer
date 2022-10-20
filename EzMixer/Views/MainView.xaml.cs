@@ -8,7 +8,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace VolumeMixer.Views
+namespace EzMixer.Views
 {
     /// <summary>
     /// Interaction logic for MainView.xaml

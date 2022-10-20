@@ -1,12 +1,12 @@
 ﻿using AudioSwitcher.AudioApi.Session;
-using VolumeMixer.Views;
+using EzMixer.Views;
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Automation;
 
-namespace VolumeMixer
+namespace EzMixer
 {
     public class SessionDisconnectedWatcher : IObserver<string>
     {

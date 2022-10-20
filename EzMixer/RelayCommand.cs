@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace VolumeMixer
+namespace EzMixer
 {
     public class RelayCommand : ICommand
     {

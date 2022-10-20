@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace VolumeMixer.Views
+namespace EzMixer.Views
 {
     /// <summary>
     /// Interaction logic for LightingView.xaml

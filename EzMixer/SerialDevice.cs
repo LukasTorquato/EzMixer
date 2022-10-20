@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace VolumeMixer
+namespace EzMixer
 {
     public class SerialDevice
     {

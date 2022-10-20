@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VolumeMixer.Views;
+using EzMixer.Views;
 
-namespace VolumeMixer
+namespace EzMixer
 {
     public class DeviceWatcher : IObserver<AudioSwitcher.AudioApi.DeviceChangedArgs>
     {

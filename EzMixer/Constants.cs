@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VolumeMixer
+namespace EzMixer
 {
     static internal class Constants
     {

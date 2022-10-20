@@ -1,1 +1,1 @@
-# VolumeMixer
+# EzMixer

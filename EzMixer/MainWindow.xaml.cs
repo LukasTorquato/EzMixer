@@ -1,4 +1,4 @@
-﻿using VolumeMixer.Views;
+﻿using EzMixer.Views;
 using System.Windows;
 using MahApps.Metro.Controls;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.IO;
 using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Forms;
 
-namespace VolumeMixer
+namespace EzMixer
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -42,7 +42,7 @@ namespace VolumeMixer
 
             trayIcon = new System.Windows.Forms.NotifyIcon();
             trayIcon.DoubleClick += (s, args) => ShowMainWindow();
-            trayIcon.Icon = VolumeMixer.Properties.Resources.mainicon;
+            trayIcon.Icon = EzMixer.Properties.Resources.mainicon;
             trayIcon.Visible = true;
 
             CreateContextMenu();

@@ -1,10 +1,10 @@
 ﻿using AudioSwitcher.AudioApi.Session;
-using VolumeMixer.Views;
+using EzMixer.Views;
 using System;
 using System.Diagnostics;
 using System.Linq;
 
-namespace VolumeMixer
+namespace EzMixer
 {
     public class SessionCreatedWatcher : IObserver<IAudioSession>
     {

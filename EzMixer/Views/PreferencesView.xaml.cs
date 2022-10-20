@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace VolumeMixer.Views
+namespace EzMixer.Views
 {
     /// <summary>
     /// Interaction logic for PreferencesView.xaml
