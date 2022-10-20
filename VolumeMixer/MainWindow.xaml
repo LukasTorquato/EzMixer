@@ -45,6 +45,16 @@
                              FontSize="18"
                              Checked="ChangeScreens"
                              IsChecked="True"/>
+                
+                <RadioButton Content="Groups"
+                             FontFamily="/Fonts/Poppins/#Poppins Medium"
+                             Height="50"
+                             Name="groupRadio"
+                             Foreground="White"
+                             IsChecked="False"
+                             Checked="ChangeScreens"
+                             Style="{StaticResource MenuButtonTheme}"
+                             FontSize="18"/>
 
                 <RadioButton Content="Lighting"
                              FontFamily="/Fonts/Poppins/#Poppins Medium"

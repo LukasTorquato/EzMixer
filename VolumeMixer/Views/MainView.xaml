@@ -105,7 +105,6 @@
                     Opacity="0.65"
                     FontSize="20"
                     BorderThickness="0"
-                      
                     VerticalContentAlignment="Top"
                     HorizontalContentAlignment="Center"
                     SelectionChanged="Session_SelectionChanged"

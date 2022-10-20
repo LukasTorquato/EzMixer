@@ -8,12 +8,14 @@ namespace VolumeMixer
 {
     public class Mixer
     {
-        //guarda o dispositivo de reprodução atual
-        private List<CoreAudioDevice> PlaybackDevices { get; set; }
 
+        private CoreAudioController audioController;
+        private List<CoreAudioDevice> PlaybackDevices { get; set; }
+        //private List<CoreAudioDevice> RecordDevices { get; set; }
+
+        //guarda o dispositivo de reprodução atual
         private CoreAudioDevice CurrentPlaybackDevice;
         //guarda o dispositivo de Mic
-        //private List<CoreAudioDevice> RecordDevices { get; set; }
         private CoreAudioDevice CurrentRecordDevice;
 
         //dic para salvar e carregar os Apps escolhidos e a iluminação de cada controle
@@ -36,16 +38,16 @@ namespace VolumeMixer
         //função para atualizar os dispositivos de playback e record atuais
         public void UpdateCurrentDevice()
         {
-            CoreAudioController controller = new CoreAudioController();
-            CurrentPlaybackDevice = controller.DefaultPlaybackDevice;
-            CurrentRecordDevice = controller.DefaultCaptureDevice;
+            //CoreAudioController controller = new CoreAudioController();
+            CurrentPlaybackDevice = audioController.DefaultPlaybackDevice;
+            CurrentRecordDevice = audioController.DefaultCaptureDevice;
         }
 
         public void UpdatePlaybackDevices()
         {
-            CoreAudioController controller = new CoreAudioController();
+            //CoreAudioController controller = new CoreAudioController();
             PlaybackDevices.Clear();
-            foreach (var device in controller.GetDevices())
+            foreach (var device in audioController.GetDevices())
             {
                 if (device.State.ToString() == "Active" && device.IsPlaybackDevice == true)
                     PlaybackDevices.Add(device);
@@ -109,7 +111,6 @@ namespace VolumeMixer
         {
             state[Constants.StateLighting][pos] = color;
         }
-
 
         //função que retorna o volume atual de um determinado controle
         public double GetSessionVolume(int pos)
@@ -194,15 +195,15 @@ namespace VolumeMixer
             masterAssignedPosition = -1;
             micAssignedPosition = -1;
 
-            CoreAudioController controller = new CoreAudioController();
+            audioController = new CoreAudioController();
             
-            CurrentPlaybackDevice = controller.DefaultPlaybackDevice;
-            CurrentRecordDevice = controller.DefaultCaptureDevice;
+            CurrentPlaybackDevice = audioController.DefaultPlaybackDevice;
+            CurrentRecordDevice = audioController.DefaultCaptureDevice;
 
             PlaybackDevices = new List<CoreAudioDevice>();
             //RecordDevices = new List<CoreAudioDevice>();
 
-            foreach(var device in controller.GetDevices())
+            foreach(var device in audioController.GetDevices())
             {
                 if (device.State.ToString() == "Active" && device.IsPlaybackDevice == true)
                     PlaybackDevices.Add(device);

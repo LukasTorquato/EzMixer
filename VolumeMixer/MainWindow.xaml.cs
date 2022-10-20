@@ -7,6 +7,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.IO;
+using MahApps.Metro.Controls.Dialogs;
+using System.Windows.Forms;
 
 namespace VolumeMixer
 {
@@ -17,6 +19,8 @@ namespace VolumeMixer
     {
 
         private readonly MainView MView;
+
+        private readonly GroupView GView;
 
         private readonly LightingView LView;
 
@@ -31,6 +35,7 @@ namespace VolumeMixer
         {
             InitializeComponent();
             MView = new MainView();
+            GView = new GroupView(MView.Controller,this);
             LView = new LightingView(MView.Controller,MView.Hardware,MView.numSliders);
             PView = new PreferencesView(this);
             this.MainContentControl.Content = MView;
@@ -43,6 +48,17 @@ namespace VolumeMixer
             CreateContextMenu();
         }
 
+        /*public async void StartMessageDialog(string title, string message)
+        {
+            await this.ShowMessageAsync(title, message);
+        }
+
+        public object StartInputDialog(string title, string message)
+        {
+            var input = this.ShowInputAsync(title, message);
+
+            return input;
+        }*/
 
         private void CreateContextMenu()
         {
@@ -50,7 +66,6 @@ namespace VolumeMixer
             trayIcon.ContextMenuStrip.Items.Add("Open Settings").Click += (s, e) => ShowMainWindow();
             trayIcon.ContextMenuStrip.Items.Add("Exit").Click += (s, e) => ExitApplication();
         }
-
 
         private void ShowMainWindow()
         {
@@ -98,6 +113,11 @@ namespace VolumeMixer
             {
                 this.ViewTitle.Text = "Lighting Selection";
                 this.MainContentControl.Content = LView;
+            }
+            else if (groupRadio.IsChecked == true)
+            {
+                this.ViewTitle.Text = "Groups Settings";
+                this.MainContentControl.Content = GView;
             }
             else if (homeRadio.IsChecked == true)
             {

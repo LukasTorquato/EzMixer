@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="VolumeMixer.Views.GroupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:local="clr-namespace:VolumeMixer.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="10">
+
+        <Grid.RowDefinitions >
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        
+<!--ItemsSource="{Binding Controller.AvailableApps.Values}"-->
+        <StackPanel Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            
+            <ComboBox 
+                    ItemsSource="{Binding Groups.Keys}"
+                    Name="GroupCombo"
+                    Opacity="1"
+                    FontSize="20"
+                    MinWidth="600"
+                    HorizontalContentAlignment="Center"
+                    SelectionChanged="Group_SelectionChanged"
+                    FontFamily="/Fonts/Poppins/#Poppins Medium"/>
+
+            <mah:DropDownButton Margin="10,0,0,0"
+                    Name = "MenuButton" 
+                    FontFamily="Segoe UI Symbol"
+                    Content="&#xE115;">
+                <mah:DropDownButton.Items>
+                    <MenuItem Click="AddGroup_Click"
+                          Header="Add"/>
+                    <MenuItem Click="RenameGroup_Click"
+                          Header="Rename"/>
+                    <MenuItem Click="DeleteGroup_Click"
+                          Header="Delete"/>
+                </mah:DropDownButton.Items>
+            </mah:DropDownButton>
+            
+        </StackPanel>
+        
+        <TextBlock Grid.Row="1"
+            Text="Available Programs"
+            Foreground="White"
+            FontSize="20"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            FontFamily="/Fonts/Poppins/#Poppins Extralight"/>
+
+        <TextBlock Grid.Row="1"
+            Grid.Column="1"
+            Text="Selected Programs"
+            Foreground="White"
+            FontSize="20"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            FontFamily="/Fonts/Poppins/#Poppins Extralight"/>
+        
+        
+        <StackPanel Grid.ColumnSpan="2"
+                    Grid.Row="2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+            <Button FontFamily="Segoe UI Symbol"
+                    Content="&#xE111;"
+                    Height="30"
+                    Width="30"
+                    Click="AddProgram_Click"/>
+        
+            <Button Margin="0,10,0,0"
+                    FontFamily="Segoe UI Symbol" 
+                    Content="&#xE112;"
+                    Height="30"
+                    Width="30"
+                    Click="RemoveProgram_Click"/>
+        </StackPanel>
+
+
+        <ListView Grid.Row="2"
+                  Name="Available_ListView"
+                  Margin="20,0,20,0"/>
+        
+        <ListView Grid.Row="2"
+                  Grid.Column="1"
+                  Name="Selected_ListView"
+                  Margin="20,0,20,0"/>
+    </Grid>
+</UserControl>

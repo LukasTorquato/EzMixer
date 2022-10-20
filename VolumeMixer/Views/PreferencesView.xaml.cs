@@ -32,7 +32,6 @@ namespace VolumeMixer.Views
         {
             if (File.Exists(Constants.PrefFileLocation))
             {
-                Debug.WriteLine("Teste");
                 string jsonString = File.ReadAllText(Constants.PrefFileLocation);
                 Preferences = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonString) ?? throw new ArgumentException();
 
@@ -67,7 +66,7 @@ namespace VolumeMixer.Views
 
         private void PollingRate_Changed(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Debug.WriteLine("TESTE SLIDER: " + e.NewValue);
+            //Debug.WriteLine("TESTE SLIDER: " + e.NewValue);
 
         }
 
