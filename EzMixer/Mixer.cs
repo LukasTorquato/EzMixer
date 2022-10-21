@@ -8,33 +8,30 @@ namespace EzMixer
 {
     public class Mixer
     {
-
+        // Controlador geral da biblioteca do mixer
         private CoreAudioController audioController;
+        // Lista de devices disponível na máquina
         private List<CoreAudioDevice> PlaybackDevices { get; set; }
         //private List<CoreAudioDevice> RecordDevices { get; set; }
-
-        //guarda o dispositivo de reprodução atual
+        // Dispositivo de reprodução atual
         private CoreAudioDevice CurrentPlaybackDevice;
-        //guarda o dispositivo de Mic
+        // Dispositivo de Microfone atual
         private CoreAudioDevice CurrentRecordDevice;
-
-        //dic para salvar e carregar os Apps escolhidos e a iluminação de cada controle
+        // Estado atual do Mixer - Apps escolhidos e a iluminação de cada controle
         private Dictionary<string, string[]> state;
-
-        //array que guarda as sessions do mixer
+        // Lista guarda as sessions do mixer utilizada em cada controle
         private List<IAudioSession>[] audioSessions;
-
-        //int para marcar o controle que comanda o master volume
+        // Posição assinalada para o controle que comanda o master volume
         private int masterAssignedPosition;
-
-        //int para marcar o controle que comanda o microfone
+        // Posição assinalada para o controle que comanda o microfone
         private int micAssignedPosition;
-        
-        //int que guarda quantos controles o mixer tem
+        // Número de controles que o mixer possui
         private int numSliders { get; set; }
-
+        // Dic para guardar os APPs disponíveis no Mixer
         public Dictionary<string, string> AvailableApps { get; set; }
         
+
+
         //função para atualizar os dispositivos de playback e record atuais
         public void UpdateCurrentDevice()
         {
