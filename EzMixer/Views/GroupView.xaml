@@ -26,8 +26,7 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
             
-            <ComboBox 
-                    ItemsSource="{Binding Groups.Keys}"
+            <ComboBox ItemsSource="{Binding Controller.Groups.Keys}"
                     Name="GroupCombo"
                     Opacity="1"
                     FontSize="20"
@@ -41,8 +40,8 @@
                     FontFamily="Segoe UI Symbol"
                     Content="&#xE115;">
                 <mah:DropDownButton.Items>
-                    <MenuItem Click="AddGroup_Click"
-                          Header="Add"/>
+                    <MenuItem Click="CreateGroup_Click"
+                          Header="Create"/>
                     <MenuItem Click="RenameGroup_Click"
                           Header="Rename"/>
                     <MenuItem Click="DeleteGroup_Click"
@@ -92,12 +91,14 @@
 
         <ListView Grid.Row="2"
                   Name="Available_ListView"
+                  ItemsSource="{Binding Controller.AvailableApps.Values}"
                   FontSize="14"
                   Margin="20,0,20,0"/>
         
         <ListView Grid.Row="2"
                   Grid.Column="1"
                   Name="Selected_ListView"
+                  ItemsSource="{Binding Controller.AvailableApps.Values}"
                   FontSize="14"
                   Margin="20,0,20,0"/>
     </Grid>

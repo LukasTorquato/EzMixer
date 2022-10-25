@@ -26,11 +26,13 @@ namespace EzMixer
 
         public const string PollingRateKey = "PollingRate";
 
-        public const string FileLocation = "../../../../config.json";
+        public const string FileLocation = "../../../config.json";
 
-        public const string PrefFileLocation = "../../../../preferences.json";
+        public const string PrefFileLocation = "../../../preferences.json";
 
-        public const string GroupsFileLocation = "../../../../groups.json";
+        public const string GroupsFileLocation = "../../../groups.json";
+
+        public const string GroupHeader = "Group: ";
 
         public const string RegistryKey = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\";
 

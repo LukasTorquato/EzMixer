@@ -29,7 +29,9 @@ namespace EzMixer
         private int numSliders { get; set; }
         // Dic para guardar os APPs disponíveis no Mixer
         public Dictionary<string, string> AvailableApps { get; set; }
-        
+        // Dic para guardar os grupos
+        public Dictionary<string, List<string>> Groups { get; set; }
+
 
 
         //função para atualizar os dispositivos de playback e record atuais
@@ -52,9 +54,12 @@ namespace EzMixer
         }
 
         //função para atualizar a session para um determinado controle
-        public void UpdateAudioSession(int pos, string name)
+        public void UpdateAudioSession(int pos, string name, bool clearopt=false)
         {
             audioSessions[pos].Clear();
+
+            if(clearopt)
+                return;
 
             if (name == Constants.Master)
             {
@@ -81,7 +86,23 @@ namespace EzMixer
                     {
                         pname = Process.GetProcessById(session.ProcessId).ProcessName;
                         //Debug.WriteLine(pname);
-                        if (pname == name || session.DisplayName == name)
+                        if (name.StartsWith(Constants.GroupHeader))
+                        {
+                            string groupName = name.Replace(Constants.GroupHeader, "");
+                            /*if (!Groups.ContainsKey(groupName))
+                            {
+                                state[Constants.StateKeys][pos] = state[Constants.StateNames][pos] = null;
+                                return;
+                            }*/
+                            if (Groups[groupName].Contains(pname) || Groups[groupName].Contains(session.DisplayName) ||
+                               (Groups[groupName].Contains(Constants.SysSounds) && session.DisplayName.Contains("System32"))) //Caso System Sounds
+                            {
+                                audioSessions[pos].Add(session);
+                            }
+                            state[Constants.StateKeys][pos] = state[Constants.StateNames][pos] = Constants.GroupHeader+groupName;
+
+                        }
+                        else if (pname == name || session.DisplayName == name)
                         {
                             audioSessions[pos].Add(session);
                             state[Constants.StateKeys][pos] = pname;
@@ -153,8 +174,6 @@ namespace EzMixer
                 {
                     if (session.DisplayName.Contains("System32"))
                         AvailableApps[pname] = Constants.SysSounds;
-                    /*else if (pname == "Discord" && !AvailableApps.ContainsValue(Constants.DiscordAlias))
-                        AvailableApps[pname+session.ProcessId] = session.DisplayName + " Voice";*/
                     else
                         AvailableApps[pname] = session.DisplayName;
                 }
@@ -164,9 +183,7 @@ namespace EzMixer
         //função que carrega o estado do arquivo para o atual do mixer
         public void LoadState(Dictionary<string, string[]> jsonState)
         {
-            state[Constants.StateKeys] = jsonState[Constants.StateKeys];
-            state[Constants.StateNames] = jsonState[Constants.StateNames];
-            state[Constants.StateLighting] = jsonState[Constants.StateLighting];
+            state = jsonState;
 
             for (int i = 0; i < numSliders; i++)
             {
@@ -177,6 +194,10 @@ namespace EzMixer
                         AvailableApps[state[Constants.StateKeys][i]] = state[Constants.StateNames][i];
                 }
             }
+            foreach(var group in Groups)
+            {
+                AvailableApps[Constants.GroupHeader + group.Key] = Constants.GroupHeader+group.Key;
+            }
             
         }
 
@@ -185,7 +206,7 @@ namespace EzMixer
         public void SetSessionObserver(SessionCreatedWatcher watcher) => CurrentPlaybackDevice.SessionController.SessionCreated.Subscribe(watcher);
         public void SetSessionDObserver(SessionDisconnectedWatcher watcher) => CurrentPlaybackDevice.SessionController.SessionDisconnected.Subscribe(watcher);
         public static void SetDeviceObserver(DeviceWatcher watcher) => new CoreAudioController().AudioDeviceChanged.Subscribe(watcher);
-        
+
         public Mixer(int _numSliders)
         {
             numSliders = _numSliders;
@@ -193,19 +214,19 @@ namespace EzMixer
             micAssignedPosition = -1;
 
             audioController = new CoreAudioController();
-            
+
             CurrentPlaybackDevice = audioController.DefaultPlaybackDevice;
             CurrentRecordDevice = audioController.DefaultCaptureDevice;
 
             PlaybackDevices = new List<CoreAudioDevice>();
             //RecordDevices = new List<CoreAudioDevice>();
 
-            foreach(var device in audioController.GetDevices())
+            foreach (var device in audioController.GetDevices())
             {
                 if (device.State.ToString() == "Active" && device.IsPlaybackDevice == true)
                     PlaybackDevices.Add(device);
                 //else if (device.State.ToString() == "Active" && device.IsCaptureDevice == true)
-                    //RecordDevices.Add(device);
+                //RecordDevices.Add(device);
 
             }
 
@@ -214,15 +235,16 @@ namespace EzMixer
             {
                 audioSessions[i] = new List<IAudioSession>();
             }
+            Groups = new Dictionary<string, List<string>>();
             AvailableApps = new Dictionary<string, string>();
             StartAvailableApps();
 
-            state = new Dictionary<string, string[]>
-            {
+            state = new Dictionary<string, string[]>();
+            /*.{
                 [Constants.StateKeys] = new string[numSliders],
                 [Constants.StateNames] = new string[numSliders],
                 [Constants.StateLighting] = new string[numSliders]
-            };
+            };*/
         }
     }
 }

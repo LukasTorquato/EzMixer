@@ -50,7 +50,7 @@ namespace EzMixer.Views
             Controller.SetSessionDObserver(SDWatcher);
             DeviceWatcher = new DeviceWatcher(this);
             Mixer.SetDeviceObserver(DeviceWatcher);
-            LoadState();
+            LoadConfig();
 
             Thread waitThread = new Thread(new ThreadStart(WaitForDevice));
             waitThread.IsBackground = true;
@@ -116,10 +116,18 @@ namespace EzMixer.Views
             File.WriteAllText(Constants.FileLocation, jsonString);
         }
 
-        public void LoadState()
+        public void LoadConfig()
         {
             try
             {
+                
+                if (File.Exists(Constants.GroupsFileLocation))
+                {
+                    string jsonString = File.ReadAllText(Constants.GroupsFileLocation);
+                    Dictionary<string, List<string>> groupsDic = JsonSerializer.Deserialize<Dictionary<string, List<string>>>(jsonString) ?? throw new ArgumentException();
+                    Controller.Groups = groupsDic;
+                }
+
                 if (File.Exists(Constants.FileLocation))
                 {
                     string jsonString = File.ReadAllText(Constants.FileLocation);
@@ -133,17 +141,15 @@ namespace EzMixer.Views
                         
                         message += i + "=" + jsonDic[Constants.StateLighting][i] + "|";
                     }
-
                     Controller.LoadState(jsonDic);
                     Hardware.LightingCommand = message;
-
                     //ComboLoad(jsonDic[Constants.StateNames]);
                     ComboLoad();
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Exception on LoadState(): " + ex.Message);
+                Debug.WriteLine("Exception on LoadConfig(): " + ex.Message);
             }
         }
 

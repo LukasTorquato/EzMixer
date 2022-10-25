@@ -40,13 +40,19 @@ namespace EzMixer
                 view.ComboRefresh();
             }
             //New app added to windows mixer and is previously selected by any combobox
-            else
+            
+            string[] selectedAppKeys = view.Controller.GetState()[Constants.StateKeys];
+            for (int i = 0; i < selectedAppKeys.Length; i++)
             {
-                string[] selectedAppKeys = view.Controller.GetState()[Constants.StateKeys];
-                for (int i = 0; i < selectedAppKeys.Length; i++)
+                if (selectedAppKeys[i] == pname)
+                    view.Controller.UpdateAudioSession(i, pname);
+                else if (selectedAppKeys[i].Contains(Constants.GroupHeader)) // check if is a group
                 {
-                    if (selectedAppKeys[i] == pname)
-                        view.Controller.UpdateAudioSession(i, pname);
+                    string groupName = selectedAppKeys[i].Replace(Constants.GroupHeader, "");
+                    if(view.Controller.Groups[groupName].Contains(value.DisplayName) || view.Controller.Groups[groupName].Contains(pname)) // check if group contains session
+                    {
+                        view.Controller.UpdateAudioSession(i, selectedAppKeys[i]);
+                    }
                 }
             }
             

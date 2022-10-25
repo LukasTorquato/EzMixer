@@ -35,8 +35,8 @@ namespace EzMixer
         {
             InitializeComponent();
             MView = new MainView();
-            GView = new GroupView(MView.Controller,this);
-            LView = new LightingView(MView.Controller,MView.Hardware,MView.numSliders);
+            GView = new GroupView(this, MView.Controller);
+            LView = new LightingView(MView.Controller, MView.Hardware, MView.numSliders);
             PView = new PreferencesView(this);
             this.MainContentControl.Content = MView;
 
@@ -48,17 +48,11 @@ namespace EzMixer
             CreateContextMenu();
         }
 
-        /*public async void StartMessageDialog(string title, string message)
+        public void UpdateMainViewCombo()
         {
-            await this.ShowMessageAsync(title, message);
+            MView.ComboLoad();
+            MView.ComboRefresh();
         }
-
-        public object StartInputDialog(string title, string message)
-        {
-            var input = this.ShowInputAsync(title, message);
-
-            return input;
-        }*/
 
         private void CreateContextMenu()
         {
@@ -117,6 +111,7 @@ namespace EzMixer
             else if (groupRadio.IsChecked == true)
             {
                 this.ViewTitle.Text = "Groups Settings";
+                this.GView.UpdateListView();
                 this.MainContentControl.Content = GView;
             }
             else if (homeRadio.IsChecked == true)
