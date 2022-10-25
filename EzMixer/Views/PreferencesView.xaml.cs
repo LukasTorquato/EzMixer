@@ -18,12 +18,12 @@ namespace EzMixer.Views
 
         private Dictionary<string, string> Preferences;
 
-        private MainWindow window;
+        private MainWindow Window;
 
-        public PreferencesView(MainWindow _window)
+        public PreferencesView(MainWindow w)
         {
             InitializeComponent();
-            window = _window;
+            Window = w;
             Preferences = new Dictionary<string, string>();
             LoadState();
         }
@@ -59,7 +59,7 @@ namespace EzMixer.Views
 
         private void CloseToTray_Toggled(object sender, RoutedEventArgs e)
         {
-            window.exitOnClose = EOC_Toggle.IsOn;
+            Window.exitOnClose = EOC_Toggle.IsOn;
             Preferences[Constants.ExitOnCloseKey] = EOC_Toggle.IsOn.ToString();
             SaveState();
         }

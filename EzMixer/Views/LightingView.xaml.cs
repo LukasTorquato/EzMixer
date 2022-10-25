@@ -17,32 +17,25 @@ namespace EzMixer.Views
     /// </summary>
     public partial class LightingView : UserControl
     {
-        private readonly string filename = Constants.FileLocation;
-
         private string[] StagedLighting;
 
-        private int numSliders;
+        private MainWindow MWindow;
 
-        private Mixer Controller { get; set; }
-
-        private SerialDevice Hardware;
-
-        public LightingView(Mixer c, SerialDevice h, int n)
+        public LightingView(MainWindow w)
         {
             InitializeComponent();
-            Controller = c;
-            Hardware = h;
-            numSliders = n;
-            StagedLighting = new string[numSliders];
 
-            Controller.GetState()[Constants.StateLighting].CopyTo(StagedLighting, 0);
+            MWindow = w;
 
-            if (File.Exists(filename))
+            StagedLighting = new string[MWindow.numSliders];
+
+            MWindow.Controller.GetState()[Constants.StateLighting].CopyTo(StagedLighting, 0);
+
+            if (File.Exists(Constants.FileLocation))
             {
                 CheckBoxLoad();
                 ComboLoad();
             }
-
         }
 
         private void CheckBoxLoad()
@@ -73,13 +66,6 @@ namespace EzMixer.Views
                 Volume5_ColorPicker.SelectedColor = (Color)ColorConverter.ConvertFromString("#" + StagedLighting[4].Replace("*", "").Replace("-", ""));
             });
 
-        }
-
-        private void SaveState()
-        {
-            Dictionary<string, string[]> jsonDictionary = Controller.GetState();
-            string jsonString = JsonSerializer.Serialize(jsonDictionary);
-            File.WriteAllText(filename, jsonString);
         }
 
         private void Volume_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
@@ -208,15 +194,15 @@ namespace EzMixer.Views
         {
             ApplyLighting_Button.IsEnabled = false;
 
-            string[] lightingstate = Controller.GetState()[Constants.StateLighting];
+            string[] lightingstate = MWindow.Controller.GetState()[Constants.StateLighting];
             string auxmessage = "";
             int ndiff = 0;
 
-            for (int i = 0; i < numSliders; i++)
+            for (int i = 0; i < MWindow.numSliders; i++)
             {
                 if (lightingstate[i] != StagedLighting[i])
                 {
-                    Controller.UpdateLighting(i, StagedLighting[i]);
+                    MWindow.Controller.UpdateLighting(i, StagedLighting[i]);
                     auxmessage += i + "=" + StagedLighting[i] + "|";
                     ndiff++;
 
@@ -226,9 +212,9 @@ namespace EzMixer.Views
             if (ndiff > 0)
             {
                 string message = "a" + ndiff + auxmessage;
-                Hardware.LightingCommand = message;
-                Hardware.UpdateLighting();
-                SaveState();
+                MWindow.Hardware.LightingCommand = message;
+                MWindow.Hardware.UpdateLighting();
+                MWindow.SaveState();
             }
             ApplyLighting_Button.IsEnabled = true;
 

@@ -43,8 +43,10 @@
                     <MenuItem Click="CreateGroup_Click"
                           Header="Create"/>
                     <MenuItem Click="RenameGroup_Click"
+                          Name="RenameButton"
                           Header="Rename"/>
                     <MenuItem Click="DeleteGroup_Click"
+                          Name="DeleteButton"
                           Header="Delete"/>
                 </mah:DropDownButton.Items>
             </mah:DropDownButton>
@@ -92,14 +94,14 @@
         <ListView Grid.Row="2"
                   Name="Available_ListView"
                   ItemsSource="{Binding Controller.AvailableApps.Values}"
-                  FontSize="14"
+                  FontSize="16"
                   Margin="20,0,20,0"/>
         
         <ListView Grid.Row="2"
                   Grid.Column="1"
                   Name="Selected_ListView"
                   ItemsSource="{Binding Controller.AvailableApps.Values}"
-                  FontSize="14"
+                  FontSize="16"
                   Margin="20,0,20,0"/>
     </Grid>
 </UserControl>

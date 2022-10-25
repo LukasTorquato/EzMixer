@@ -12,9 +12,9 @@ namespace EzMixer
 {
     public class DeviceWatcher : IObserver<AudioSwitcher.AudioApi.DeviceChangedArgs>
     {
-        public MainView view;
+        public MainWindow view;
 
-        public DeviceWatcher(MainView window)
+        public DeviceWatcher(MainWindow window)
         {
             view = window;
         }

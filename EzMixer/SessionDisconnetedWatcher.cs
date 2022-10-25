@@ -10,9 +10,9 @@ namespace EzMixer
 {
     public class SessionDisconnectedWatcher : IObserver<string>
     {
-        public MainView view;
+        public MainWindow view;
 
-        public SessionDisconnectedWatcher(MainView window)
+        public SessionDisconnectedWatcher(MainWindow window)
         {
             view = window;
         }
@@ -40,7 +40,8 @@ namespace EzMixer
             if (KeyToRemove != "")
             {
                 view.Controller.AvailableApps.Remove(KeyToRemove);
-                view.ComboRefresh();
+                view.MView.ComboRefresh();
+                view.GView.UpdateListView();
             }
 
         }
