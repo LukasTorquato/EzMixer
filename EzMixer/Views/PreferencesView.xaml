@@ -20,6 +20,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition />
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         
@@ -77,48 +78,26 @@
             
             
         <!-- Polling Rate Start -->    
-        <Slider Grid.Row="3"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
+        <Slider Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                 Margin="10,0,10,0"
                 Name="PollingRate_Slider"
                 TickPlacement="TopLeft"
                 IsSnapToTickEnabled="True"
                 ValueChanged="PollingRate_Changed"
-                TickFrequency="50"
-                Maximum="150"
-                Minimum="50"/>
+                TickFrequency="1"
+                Maximum="4"
+                Minimum="1"/>
 
-        <TextBlock Grid.Column="0"
-            Grid.Row="3"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Foreground="White"
-            FontSize="16"
-            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
-            Text="50"/>
-
-        <TextBlock Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Grid.Row="3"
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Foreground="White"
             FontSize="16"
+            Name="ReportRate_Text"
             FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
             Text="100"/>
 
-        <TextBlock Grid.Column="1"
-            Grid.Row="3"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Foreground="White"
-            FontSize="16"
-            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
-            Text="150"/>
-
-        <TextBlock Grid.Column="2"
-            Grid.Row="3"
+        <TextBlock Grid.Column="2" Grid.Row="3"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Foreground="White"
@@ -126,8 +105,7 @@
             FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
             Text="Report Rate (Per Second)"/>
 
-        <TextBlock Grid.Column="2"
-            Grid.Row="3"
+        <TextBlock Grid.Column="2" Grid.Row="3"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Foreground="White"
@@ -138,7 +116,47 @@
             Lower: More delay, less CPU usage.
         </TextBlock>
             
-        <!-- Polling Rate End -->  
+        <!-- Polling Rate End -->
+
+
+        <!-- Sensibility Start -->
+        <Slider Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                Margin="10,0,10,0"
+                Name="Sensibility_Slider"
+                TickPlacement="TopLeft"
+                IsSnapToTickEnabled="True"
+                ValueChanged="Sensibility_Changed"
+                TickFrequency="1" Maximum="10" Minimum="1"/>
+
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Foreground="White"
+            FontSize="16"
+            Name="Sensibility_Text"
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
+            Text="2"/>
+
+        <TextBlock Grid.Column="2" Grid.Row="4"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="White"
+            FontSize="16"
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
+            Text="Control Sensibility"/>
+
+        <TextBlock Grid.Column="2" Grid.Row="4"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Foreground="White"
+            TextAlignment="Center"
+            FontSize="8"
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight">
+            Higher: Big changes to volume at once.<LineBreak/>
+            Lower: Small changes to volume at once.
+        </TextBlock>
+
+        <!-- Sensibility End -->
 
     </Grid>
 </UserControl>

@@ -46,7 +46,7 @@ namespace EzMixer.Views
             {
                 Preferences[Constants.ExitOnCloseKey] = false.ToString();
                 Preferences[Constants.WindowsStartupKey] = false.ToString();
-                Preferences[Constants.PollingRateKey] = 100.ToString();
+                Preferences[Constants.PollingRateKey] = 2.ToString();
                 SaveState();
             }
         }
@@ -66,7 +66,11 @@ namespace EzMixer.Views
 
         private void PollingRate_Changed(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            //Debug.WriteLine("TESTE SLIDER: " + e.NewValue);
+            int test = (int)e.NewValue;
+            if(ReportRate_Text != null)
+                ReportRate_Text.Text = (test * 50).ToString()+" Hz";
+
+            Debug.WriteLine("TESTE SLIDER: " + e.NewValue);
 
         }
 
@@ -79,6 +83,11 @@ namespace EzMixer.Views
 
             Preferences[Constants.WindowsStartupKey] = WinStartup_Toggle.IsOn.ToString();
             SaveState();
+        }
+
+        private void Sensibility_Changed(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
         }
     }
 }

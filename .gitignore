@@ -363,6 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # User Files
-groups.json
-preferences.json
-config.json
+EzMixer/groups.json
+EzMixer/preferences.json
+EzMixer/config.json
