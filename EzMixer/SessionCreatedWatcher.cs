@@ -41,8 +41,8 @@ namespace EzMixer
                 MWindow.GView.UpdateListView();
             }
             //New app added to windows mixer and is previously selected by any combobox
-            
-            string[] selectedAppKeys = MWindow.Controller.GetState()[Constants.StateKeys];
+            MWindow.Controller.ReloadAudioSessions();
+            /*string[] selectedAppKeys = MWindow.Controller.GetState()[Constants.StateKeys];
             for (int i = 0; i < selectedAppKeys.Length; i++)
             {
                 if (selectedAppKeys[i] == pname)
@@ -55,7 +55,7 @@ namespace EzMixer
                         MWindow.Controller.UpdateAudioSession(i, selectedAppKeys[i]);
                     }
                 }
-            }
+            }*/
             
         }
     }

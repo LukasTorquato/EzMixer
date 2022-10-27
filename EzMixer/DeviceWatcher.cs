@@ -36,6 +36,7 @@ namespace EzMixer
                 view.Controller.UpdateCurrentDevice();
                 view.Controller.SetSessionObserver(view.SCWatcher);
                 view.Controller.SetSessionDObserver(view.SDWatcher);
+                view.Controller.ReloadAudioSessions();
             }
             else if(value.ChangedType.ToString() == "StateChanged")
             {

@@ -20,8 +20,6 @@ namespace EzMixer.Views
 
         public List<string> AvailablePrograms { get; set; }
 
-        public List<string> SelectedPrograms { get; set; }
-
         public GroupView(MainWindow w)
         {
             InitializeComponent();

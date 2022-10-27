@@ -34,7 +34,7 @@ namespace EzMixer
 
 
 
-        //função para atualizar os dispositivos de playback e record atuais
+        //Atualiza os dispositivos de playback e record atuais
         public void UpdateCurrentDevice()
         {
             //CoreAudioController controller = new CoreAudioController();
@@ -42,6 +42,7 @@ namespace EzMixer
             CurrentRecordDevice = audioController.DefaultCaptureDevice;
         }
 
+        //Atualiza os dispositivos disponíveis
         public void UpdatePlaybackDevices()
         {
             //CoreAudioController controller = new CoreAudioController();
@@ -53,11 +54,10 @@ namespace EzMixer
             }
         }
 
-        //função para atualizar a session para um determinado controle
+        //Atualizar a session para um determinado controle
         public void UpdateAudioSession(int pos, string name, bool clearopt=false)
         {
             audioSessions[pos].Clear();
-
             if(clearopt)
                 return;
 
@@ -124,13 +124,13 @@ namespace EzMixer
             }
         }
 
-        //função para atualizar a iluminação para um determinado controle
+        //Atualizar a iluminação para um determinado controle
         public void UpdateLighting(int pos, string color)
         {
             state[Constants.StateLighting][pos] = color;
         }
 
-        //função que retorna o volume atual de um determinado controle
+        //Retorna o volume atual de um determinado controle
         public double GetSessionVolume(int pos)
         {
             if (masterAssignedPosition == pos)
@@ -143,7 +143,7 @@ namespace EzMixer
                 return 0;
         }
 
-        //função que seta o volume atual para um determinado controle
+        //Seta o volume atual para um determinado controle
         public void SetSessionVolume(int pos, double vol)
         {
             if (masterAssignedPosition == pos)
@@ -158,7 +158,7 @@ namespace EzMixer
                 
         }
 
-        //função que retona os Apps disponíveis no mixer do windows
+        //Inicia os Apps disponíveis no mixer do windows
         public void StartAvailableApps()
         {
             string pname;
@@ -180,7 +180,7 @@ namespace EzMixer
             }
         }
 
-        //função que carrega o estado do arquivo para o atual do mixer
+        //Carrega o estado do arquivo para o atual do mixer
         public void LoadState(Dictionary<string, string[]> jsonState)
         {
             state = jsonState;
@@ -199,6 +199,15 @@ namespace EzMixer
                 AvailableApps[Constants.GroupHeader + group.Key] = Constants.GroupHeader+group.Key;
             }
             
+        }
+
+        //Recarrega todas sessions do mixer
+        public void ReloadAudioSessions()
+        {
+            for (int i = 0; i < numSliders; i++)
+            {
+                UpdateAudioSession(i, state[Constants.StateNames][i]);
+            }
         }
 
         //função que retorna o estado atual do mixer
@@ -240,11 +249,6 @@ namespace EzMixer
             StartAvailableApps();
 
             state = new Dictionary<string, string[]>();
-            /*.{
-                [Constants.StateKeys] = new string[numSliders],
-                [Constants.StateNames] = new string[numSliders],
-                [Constants.StateLighting] = new string[numSliders]
-            };*/
         }
     }
 }

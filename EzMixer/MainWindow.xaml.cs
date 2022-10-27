@@ -206,6 +206,7 @@ namespace EzMixer
 
             trayIcon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             trayIcon.ContextMenuStrip.Items.Add("Open Settings").Click += (s, e) => ShowMainWindow();
+            trayIcon.ContextMenuStrip.Items.Add("Reload Sessions").Click += (s, e) => Controller.ReloadAudioSessions();
             trayIcon.ContextMenuStrip.Items.Add("Exit").Click += (s, e) => ExitApplication();
         }
 
@@ -270,5 +271,7 @@ namespace EzMixer
                 this.MainContentControl.Content = PView;
             }
         }
+
+        private void ReloadSessions_Click(object sender, RoutedEventArgs e) => Controller.ReloadAudioSessions();
     }
 }
