@@ -20,21 +20,19 @@ namespace EzMixer.Views
 
         private MainWindow MWindow;
 
-        private bool start = true;
-        
         public PreferencesView(MainWindow w)
         {
             InitializeComponent();
             MWindow = w;
             Preferences = new Dictionary<string, string>();
-            start = false;
             LoadState();
         }
 
-        private void LoadState()
+        private void LoadState() 
         {
-            if (File.Exists(Constants.PrefFileLocation))
+            if (File.Exists(Constants.PrefFileLocation)) // Maybe this can go to LoadConfig() in MainWindow
             {
+                // Reading saved values from the file
                 string jsonString = File.ReadAllText(Constants.PrefFileLocation);
                 Preferences = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonString) ?? throw new ArgumentException();
 
@@ -49,6 +47,7 @@ namespace EzMixer.Views
             }
             else
             {
+                // Setting up stock values and creating a new file
                 Preferences[Constants.ExitOnCloseKey] = false.ToString();
                 Preferences[Constants.WindowsStartupKey] = false.ToString();
                 Preferences[Constants.PollingRateKey] = 2.ToString();
@@ -57,12 +56,14 @@ namespace EzMixer.Views
             }
         }
 
+        // Save all flags and controls to the preferences.json file
         private void SaveState()
         {
             string jsonString = JsonSerializer.Serialize(Preferences);
             File.WriteAllText(Constants.PrefFileLocation, jsonString);
         }
 
+        // Change the flag that determines if the application is exited on close
         private void CloseToTray_Toggled(object sender, RoutedEventArgs e)
         {
             MWindow.exitOnClose = EOC_Toggle.IsOn;
@@ -70,21 +71,19 @@ namespace EzMixer.Views
             SaveState();
         }
 
+        // Change polling rate by changing the value of delay in ms
         private void PollingRate_Changed(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (start)
-                return;
-
-            int value = (int)e.NewValue;
             if (ReportRate_Text != null)
-            {
+            {   
+                Debug.WriteLine("TesteSlider: "+ e.NewValue);
+                int value = (int)e.NewValue;
                 Preferences[Constants.SensibilityKey] = value.ToString();
                 ReportRate_Text.Text = (value * 50).ToString() + " Hz";
-                MWindow.Hardware.UpdatePollingRate(value.ToString());
                 MWindow.pollingMS = 1000 / (value * 50);
+                MWindow.Hardware.UpdatePollingRate(value.ToString());
                 SaveState();
             }
-
         }
 
         private void WinStartup_Toggled(object sender, RoutedEventArgs e)
@@ -98,14 +97,13 @@ namespace EzMixer.Views
             SaveState();
         }
 
+        // Change sensibility variation
         private void Sensibility_Changed(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (start)
-                return;
-
-            int value = (int)e.NewValue;
             if (Sensibility_Text != null)
             {
+                Debug.WriteLine("TesteSliderSens: " + e.NewValue);
+                int value = (int)e.NewValue;
                 Preferences[Constants.SensibilityKey] = value.ToString();
                 Sensibility_Text.Text = value.ToString();
                 MWindow.sensibility = value;

@@ -170,7 +170,8 @@ namespace EzMixer
                 {
                     string jsonString = File.ReadAllText(Constants.FileLocation);
                     Dictionary<string, string[]> jsonDic = JsonSerializer.Deserialize<Dictionary<string, string[]>>(jsonString) ?? throw new ArgumentException();
-
+                    
+                    //setting stock lighting
                     string message = "a5";
                     for (int i = 0; i < numSliders; i++)
                     {
@@ -182,7 +183,6 @@ namespace EzMixer
                     Controller.LoadState(jsonDic);
                     Hardware.LightingCommand = message;
 
-                    //MView.ComboLoad();
                 }
             }
             catch (Exception ex)
