@@ -76,7 +76,6 @@ namespace EzMixer.Views
         {
             if (ReportRate_Text != null)
             {   
-                Debug.WriteLine("TesteSlider: "+ e.NewValue);
                 int value = (int)e.NewValue;
                 Preferences[Constants.SensibilityKey] = value.ToString();
                 ReportRate_Text.Text = (value * 50).ToString() + " Hz";
@@ -102,7 +101,6 @@ namespace EzMixer.Views
         {
             if (Sensibility_Text != null)
             {
-                Debug.WriteLine("TesteSliderSens: " + e.NewValue);
                 int value = (int)e.NewValue;
                 Preferences[Constants.SensibilityKey] = value.ToString();
                 Sensibility_Text.Text = value.ToString();
