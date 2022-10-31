@@ -44,5 +44,7 @@ namespace EzMixer
 
         public const string RegPattern = @"^(\d{1,4}[-]\d{1,4}[-\s]\d{1,4}[-\s]\d{1,4})([-\s]\d{1,4})?$";
 
+        public const string RegistryKeyPath = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+
     }
 }

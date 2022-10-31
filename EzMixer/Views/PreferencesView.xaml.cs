@@ -1,8 +1,10 @@
 ﻿using MahApps.Metro.Controls;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,6 +21,8 @@ namespace EzMixer.Views
         private Dictionary<string, string> Preferences;
 
         private MainWindow MWindow;
+
+        RegistryKey RegistryKey = Registry.CurrentUser.OpenSubKey(Constants.RegistryKeyPath, true);
 
         public PreferencesView(MainWindow w)
         {
@@ -87,10 +91,14 @@ namespace EzMixer.Views
 
         private void WinStartup_Toggled(object sender, RoutedEventArgs e)
         {
-            /*if (WinStartup_Toggle.IsOn == true)
-                window.exitOnClose = true;
-            else
-                window.exitOnClose = false;*/
+            if (WinStartup_Toggle.IsOn && RegistryKey.GetValue(@Assembly.GetEntryAssembly().GetName().Name) == null)
+            {
+                RegistryKey.SetValue(@Assembly.GetEntryAssembly().GetName().Name, Assembly.GetEntryAssembly());
+            }
+            else if (!WinStartup_Toggle.IsOn && RegistryKey.GetValue(@Assembly.GetEntryAssembly().GetName().Name) != null)
+            {
+                RegistryKey.DeleteValue(@Assembly.GetEntryAssembly().GetName().Name);
+            }
 
             Preferences[Constants.WindowsStartupKey] = WinStartup_Toggle.IsOn.ToString();
             SaveState();

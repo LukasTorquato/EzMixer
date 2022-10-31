@@ -11,6 +11,7 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
+using Microsoft.Win32;
 
 namespace EzMixer
 {
@@ -54,6 +55,9 @@ namespace EzMixer
 
         // Config Variables
         public bool exitOnClose = false;
+
+        // Startup Variables
+        public RegistryKey registryKey;
 
 
         public MainWindow()
