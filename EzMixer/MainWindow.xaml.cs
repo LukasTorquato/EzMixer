@@ -34,9 +34,9 @@ namespace EzMixer
         // Main Variables
         public readonly int numSliders = 5;
 
-        private int sensibility = 2;
+        public int sensibility = 2;
 
-        private int pollingMS = 10;
+        public int pollingMS = 10;
 
         private double[] Volumes;
 

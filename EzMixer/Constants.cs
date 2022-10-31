@@ -26,6 +26,8 @@ namespace EzMixer
 
         public const string PollingRateKey = "PollingRate";
 
+        public const string SensibilityKey = "Sens";
+
         public const string FileLocation = "../../../config.json";
 
         public const string PrefFileLocation = "../../../preferences.json";

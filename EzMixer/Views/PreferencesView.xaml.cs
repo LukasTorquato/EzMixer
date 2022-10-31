@@ -18,13 +18,16 @@ namespace EzMixer.Views
 
         private Dictionary<string, string> Preferences;
 
-        private MainWindow Window;
+        private MainWindow MWindow;
 
+        private bool start = true;
+        
         public PreferencesView(MainWindow w)
         {
             InitializeComponent();
-            Window = w;
+            MWindow = w;
             Preferences = new Dictionary<string, string>();
+            start = false;
             LoadState();
         }
 
@@ -41,12 +44,15 @@ namespace EzMixer.Views
                     WinStartup_Toggle.IsOn = bool.Parse(Preferences[Constants.WindowsStartupKey]);
                 if (Preferences[Constants.PollingRateKey] != null)
                     PollingRate_Slider.Value = int.Parse(Preferences[Constants.PollingRateKey]);
+                if (Preferences[Constants.SensibilityKey] != null)
+                    Sensibility_Slider.Value = int.Parse(Preferences[Constants.SensibilityKey]);
             }
             else
             {
                 Preferences[Constants.ExitOnCloseKey] = false.ToString();
                 Preferences[Constants.WindowsStartupKey] = false.ToString();
                 Preferences[Constants.PollingRateKey] = 2.ToString();
+                Preferences[Constants.SensibilityKey] = 1.ToString();
                 SaveState();
             }
         }
@@ -59,18 +65,25 @@ namespace EzMixer.Views
 
         private void CloseToTray_Toggled(object sender, RoutedEventArgs e)
         {
-            Window.exitOnClose = EOC_Toggle.IsOn;
+            MWindow.exitOnClose = EOC_Toggle.IsOn;
             Preferences[Constants.ExitOnCloseKey] = EOC_Toggle.IsOn.ToString();
             SaveState();
         }
 
         private void PollingRate_Changed(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            int test = (int)e.NewValue;
-            if(ReportRate_Text != null)
-                ReportRate_Text.Text = (test * 50).ToString()+" Hz";
+            if (start)
+                return;
 
-            Debug.WriteLine("TESTE SLIDER: " + e.NewValue);
+            int value = (int)e.NewValue;
+            if (ReportRate_Text != null)
+            {
+                Preferences[Constants.SensibilityKey] = value.ToString();
+                ReportRate_Text.Text = (value * 50).ToString() + " Hz";
+                MWindow.Hardware.UpdatePollingRate(value.ToString());
+                MWindow.pollingMS = 1000 / (value * 50);
+                SaveState();
+            }
 
         }
 
@@ -87,6 +100,17 @@ namespace EzMixer.Views
 
         private void Sensibility_Changed(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            if (start)
+                return;
+
+            int value = (int)e.NewValue;
+            if (Sensibility_Text != null)
+            {
+                Preferences[Constants.SensibilityKey] = value.ToString();
+                Sensibility_Text.Text = value.ToString();
+                MWindow.sensibility = value;
+                SaveState();
+            }
 
         }
     }

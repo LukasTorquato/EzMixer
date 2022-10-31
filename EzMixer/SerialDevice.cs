@@ -86,6 +86,12 @@ namespace EzMixer
 
         public void ClearInBuffer() => device.DiscardInBuffer();
         
+        public void UpdatePollingRate(string value)
+        {
+            device.DiscardOutBuffer();
+            device.WriteLine("b"+value);
+        }
+
         public void UpdateLighting()
         {
             try

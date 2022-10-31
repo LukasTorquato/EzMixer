@@ -94,8 +94,7 @@
             Foreground="White"
             FontSize="16"
             Name="ReportRate_Text"
-            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
-            Text="100"/>
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"/>
 
         <TextBlock Grid.Column="2" Grid.Row="3"
             HorizontalAlignment="Center"
@@ -134,8 +133,7 @@
             Foreground="White"
             FontSize="16"
             Name="Sensibility_Text"
-            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
-            Text="2"/>
+            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"/>
 
         <TextBlock Grid.Column="2" Grid.Row="4"
             HorizontalAlignment="Center"
