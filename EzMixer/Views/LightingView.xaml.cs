@@ -31,11 +31,8 @@ namespace EzMixer.Views
 
             MWindow.Controller.GetState()[Constants.StateLighting].CopyTo(StagedLighting, 0);
 
-            if (File.Exists(Constants.FileLocation))
-            {
-                CheckBoxLoad();
-                ComboLoad();
-            }
+            CheckBoxLoad();
+            ComboLoad();
         }
 
         private void CheckBoxLoad()

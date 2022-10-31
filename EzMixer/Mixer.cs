@@ -181,9 +181,10 @@ namespace EzMixer
         }
 
         //Carrega o estado do arquivo para o atual do mixer
-        public void LoadState(Dictionary<string, string[]> jsonState)
+        public void LoadState(Dictionary<string, string[]> jsonState = null)
         {
-            state = jsonState;
+            if (jsonState != null)
+                state = jsonState;
 
             for (int i = 0; i < numSliders; i++)
             {
@@ -192,6 +193,10 @@ namespace EzMixer
                     UpdateAudioSession(i, state[Constants.StateNames][i]);
                     if (AvailableApps.ContainsKey(state[Constants.StateKeys][i]) == false)
                         AvailableApps[state[Constants.StateKeys][i]] = state[Constants.StateNames][i];
+                }
+                if (state[Constants.StateLighting][i] == null)
+                {
+                    state[Constants.StateLighting][i] = Constants.StockColor + "*";
                 }
             }
             foreach(var group in Groups)
@@ -206,7 +211,8 @@ namespace EzMixer
         {
             for (int i = 0; i < numSliders; i++)
             {
-                UpdateAudioSession(i, state[Constants.StateNames][i]);
+                if (state[Constants.StateNames][i] != null)
+                    UpdateAudioSession(i, state[Constants.StateNames][i]);
             }
         }
 
@@ -248,7 +254,12 @@ namespace EzMixer
             AvailableApps = new Dictionary<string, string>();
             StartAvailableApps();
 
-            state = new Dictionary<string, string[]>();
+            state = new Dictionary<string, string[]>()
+            {
+                [Constants.StateKeys] = new string[numSliders],
+                [Constants.StateNames] = new string[numSliders],
+                [Constants.StateLighting] = new string[numSliders]
+            };
         }
     }
 }

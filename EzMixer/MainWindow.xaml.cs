@@ -170,20 +170,21 @@ namespace EzMixer
                 {
                     string jsonString = File.ReadAllText(Constants.FileLocation);
                     Dictionary<string, string[]> jsonDic = JsonSerializer.Deserialize<Dictionary<string, string[]>>(jsonString) ?? throw new ArgumentException();
-                    
-                    //setting stock lighting
-                    string message = "a5";
-                    for (int i = 0; i < numSliders; i++)
-                    {
-                        if (jsonDic[Constants.StateLighting][i] == null)
-                            jsonDic[Constants.StateLighting][i] = "FFFFFF*";
 
-                        message += i + "=" + jsonDic[Constants.StateLighting][i] + "|";
-                    }
                     Controller.LoadState(jsonDic);
-                    Hardware.LightingCommand = message;
-
                 }
+                else
+                    Controller.LoadState();
+
+
+                SaveState();
+                //update lighting at start
+                string message = "a5";
+                for (int i = 0; i < numSliders; i++)
+                {
+                    message += i + "=" + Controller.GetState()[Constants.StateLighting][i] + "|";
+                }
+                Hardware.LightingCommand = message;
             }
             catch (Exception ex)
             {

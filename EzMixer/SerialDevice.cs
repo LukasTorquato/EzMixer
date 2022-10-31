@@ -66,7 +66,7 @@ namespace EzMixer
 
             try
             {
-                string[] strvol = device.ReadLine().Replace("\n", "").Replace("\r", "").Split("|");
+                string[] strvol = device.ReadLine().Replace("\n", "").Replace("\r", "").Split("-");
                 for (int i = 0; i < numSliders; i++)
                 {
                     volumes[i] = (Math.Floor(double.Parse(strvol[i]) / (sensibility*10)))*sensibility;
@@ -88,8 +88,15 @@ namespace EzMixer
         
         public void UpdatePollingRate(string value)
         {
-            device.DiscardOutBuffer();
-            device.WriteLine("b"+value);
+            try
+            {
+                device.DiscardOutBuffer();
+                device.WriteLine("b" + value);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error on UpdatePollingRate(): " + ex.InnerException + ex.Message);
+            }
         }
 
         public void UpdateLighting()
