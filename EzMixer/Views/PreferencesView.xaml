@@ -64,7 +64,9 @@
         <mah:ToggleSwitch Grid.Column="1"
             Grid.Row="2"
             HorizontalAlignment="Left"
-            Content=""/>
+            Content=""
+            Name="StartMinimized_Toggle"
+            Toggled="StartMinimized_Toggled"/>
 
         <TextBlock Grid.Column="2"
             Grid.Row="2"
@@ -73,7 +75,7 @@
             Foreground="White"
             FontSize="16"
             FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
-            Text="Lorem Ipsum"/>
+            Text="Start Minimized"/>
         <!-- Close to Tray End -->
             
             

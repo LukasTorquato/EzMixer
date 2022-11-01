@@ -26,6 +26,8 @@ namespace EzMixer
 
         public const string WindowsStartupKey = "WinStart";
 
+        public const string StartMinimizedKey = "SMin";
+
         public const string PollingRateKey = "PollingRate";
 
         public const string SensibilityKey = "Sens";

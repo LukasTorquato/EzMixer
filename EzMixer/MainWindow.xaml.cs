@@ -22,38 +22,30 @@ namespace EzMixer
 
         // VIEWS
         public readonly MainView MView;
-
         public readonly GroupView GView;
-
         public readonly LightingView LView;
-
         public readonly PreferencesView PView;
 
         private System.Windows.Forms.NotifyIcon trayIcon;
 
         // Main Variables
         public readonly int numSliders = 5;
-
         public int sensibility = 2;
-
         public int pollingMS = 10;
-
         private double[] Volumes;
 
         // Watcher Variables
         public SessionCreatedWatcher SCWatcher;
-
         public SessionDisconnectedWatcher SDWatcher;
-
         private DeviceWatcher DeviceWatcher;
 
         // Mixer and Hardware Variables
         public Mixer Controller { get; set; }
-
         public SerialDevice Hardware;
 
         // Config Variables
         public bool exitOnClose = false;
+        public bool startMinimized = false;
 
 
         public MainWindow()
@@ -91,6 +83,9 @@ namespace EzMixer
 
             this.MainContentControl.Content = MView;
             CreateTrayMenu();
+
+            if(startMinimized)
+                this.Hide();
         }
 
         // Function to check if the device is connected 

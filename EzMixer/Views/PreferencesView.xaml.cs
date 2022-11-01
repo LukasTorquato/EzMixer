@@ -40,6 +40,8 @@ namespace EzMixer.Views
                     EOC_Toggle.IsOn = bool.Parse(Preferences[Constants.ExitOnCloseKey]);
                 if (Preferences[Constants.WindowsStartupKey] != null)
                     WinStartup_Toggle.IsOn = bool.Parse(Preferences[Constants.WindowsStartupKey]);
+                if (Preferences[Constants.StartMinimizedKey] != null)
+                    StartMinimized_Toggle.IsOn = bool.Parse(Preferences[Constants.StartMinimizedKey]);
                 if (Preferences[Constants.PollingRateKey] != null)
                     PollingRate_Slider.Value = int.Parse(Preferences[Constants.PollingRateKey]);
                 if (Preferences[Constants.SensibilityKey] != null)
@@ -50,6 +52,7 @@ namespace EzMixer.Views
                 // Setting up stock values and creating a new file
                 Preferences[Constants.ExitOnCloseKey] = false.ToString();
                 Preferences[Constants.WindowsStartupKey] = false.ToString();
+                Preferences[Constants.StartMinimizedKey] = false.ToString();
                 Preferences[Constants.PollingRateKey] = 2.ToString();
                 Preferences[Constants.SensibilityKey] = 1.ToString();
                 SaveState();
@@ -108,6 +111,13 @@ namespace EzMixer.Views
                 SaveState();
             }
 
+        }
+
+        private void StartMinimized_Toggled(object sender, RoutedEventArgs e)
+        {
+            MWindow.startMinimized = StartMinimized_Toggle.IsOn;
+            Preferences[Constants.StartMinimizedKey] = StartMinimized_Toggle.IsOn.ToString();
+            SaveState();
         }
     }
 }
