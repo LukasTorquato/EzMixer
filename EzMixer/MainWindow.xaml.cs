@@ -22,10 +22,10 @@ namespace EzMixer
     {
 
         // VIEWS
-        public readonly MainView MView;
-        public readonly GroupView GView;
-        public readonly LightingView LView;
-        public readonly PreferencesView PView;
+        public readonly MainView MainView;
+        public readonly GroupView GroupView;
+        public readonly LightingView LightingView;
+        public readonly PreferencesView PreferencesView;
 
         private System.Windows.Forms.NotifyIcon trayIcon;
 
@@ -78,14 +78,14 @@ namespace EzMixer
             waitThread.Start();
 
             // Initialize views
-            MView = new MainView(this);
-            GView = new GroupView(this);
-            LView = new LightingView(this);
-            PView = new PreferencesView(this);
+            MainView = new MainView(this);
+            GroupView = new GroupView(this);
+            LightingView = new LightingView(this);
+            PreferencesView = new PreferencesView(this);
 
             UpdateMainViewCombos();
 
-            this.MainContentControl.Content = MView;
+            this.MainContentControl.Content = MainView;
             CreateTrayMenu();
 
             if(startMinimized)
@@ -193,8 +193,8 @@ namespace EzMixer
 
         public void UpdateMainViewCombos()
         {
-            MView.ComboLoad();
-            MView.ComboRefresh();
+            MainView.ComboLoad();
+            MainView.ComboRefresh();
         }
 
         private void CreateTrayMenu()
@@ -246,29 +246,29 @@ namespace EzMixer
 
         private void ChangeScreens(object sender, RoutedEventArgs e)
         {
-            if (MView is null || LView is null || PView is null)
+            if (MainView is null || LightingView is null || PreferencesView is null)
             {
                 return;
             }
             if (lightingRadio.IsChecked == true)
             {
                 this.ViewTitle.Text = "Lighting Selection";
-                this.MainContentControl.Content = LView;
+                this.MainContentControl.Content = LightingView;
             }
             else if (groupRadio.IsChecked == true)
             {
                 this.ViewTitle.Text = "Groups Settings";
-                this.MainContentControl.Content = GView;
+                this.MainContentControl.Content = GroupView;
             }
             else if (homeRadio.IsChecked == true)
             {
                 this.ViewTitle.Text = "Application Selection";
-                this.MainContentControl.Content = MView;
+                this.MainContentControl.Content = MainView;
             }
             else if (preferencesRadio.IsChecked == true)
             {
                 this.ViewTitle.Text = "Configurations";
-                this.MainContentControl.Content = PView;
+                this.MainContentControl.Content = PreferencesView;
             }
         }
 
