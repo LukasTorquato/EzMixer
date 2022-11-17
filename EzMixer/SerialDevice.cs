@@ -22,6 +22,9 @@ namespace EzMixer
 
         private readonly int numSliders;
 
+        private double[] oldVolumes;
+        private double[] volumes;
+        
         public void ScanDevicePort()
         {
             foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
@@ -60,16 +63,40 @@ namespace EzMixer
             }
         }
 
+        private bool noiseReduction(double old, double neww)
+        {
+            bool applicable = false;
+            
+            double diff = Math.Abs(old - neww);
+
+            if (diff > 40) {
+                /*if (i == 2)
+                {
+                    Debug.WriteLine("OLD: " + old);
+                    Debug.WriteLine("NEW: " + neww);
+                }*/
+                applicable = true;
+            }
+
+            return applicable;
+        }
+
         public double[] GetVolume(int sensibility)
         {
-            double[] volumes = new double[numSliders];
+            //double[] volumes = new double[numSliders];
 
             try
             {
-                string[] strvol = device.ReadLine().Replace("\n", "").Replace("\r", "").Split("-");
+                string[] strvol = device.ReadLine().Replace("\n", "").Replace("\r", "").Split("-");//499-500
                 for (int i = 0; i < numSliders; i++)
                 {
-                    volumes[i] = (Math.Floor(double.Parse(strvol[i]) / (sensibility*10)))*sensibility;
+                    //if (noiseReduction(oldVolumes[i], double.Parse(strvol[i])) == true || double.Parse(strvol[i])<12 || double.Parse(strvol[i]) > 1000)
+                    //{
+                    //   oldVolumes[i] = double.Parse(strvol[i]);
+                    //volumes[i] = (Math.Floor(double.Parse(strvol[i]) / (sensibility * 10))) * sensibility;
+                    volumes[i] = (Math.Floor(double.Parse(strvol[i])/10));
+                    //Debug.WriteLine("Volume["+i+"]: "+volumes[i]);
+                    ///}
                 }
             }
             catch (System.InvalidOperationException ex)
@@ -122,6 +149,13 @@ namespace EzMixer
                 ReadTimeout = 2000
             };
             numSliders = _numsliders;
+            oldVolumes = new double[numSliders];
+            volumes = new double[numSliders];
+            for (int i=0; i < numSliders; i++)
+            {
+                oldVolumes[i] = 0;
+                volumes[i] = 0;
+            }
             ScanDevicePort();
 
         }

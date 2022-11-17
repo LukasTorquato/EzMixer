@@ -92,6 +92,7 @@
                     HorizontalAlignment="Right"
                     FontFamily="Segoe UI Symbol"
                     Content="&#xE117;"
+                    ToolTip="Reload Sessions"
                     Click="ReloadSessions_Click"
                     Margin="0,20,35,0"/>
 

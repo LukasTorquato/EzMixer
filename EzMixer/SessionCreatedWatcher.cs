@@ -37,8 +37,8 @@ namespace EzMixer
                 else
                     MWindow.Controller.AvailableApps[pname] = value.DisplayName;
 
-                MWindow.MView.ComboRefresh();
-                MWindow.GView.UpdateListView();
+                MWindow.MainView.ComboRefresh();
+                MWindow.GroupView.UpdateListView();
             }
             //New app added to windows mixer and is previously selected by any combobox
             MWindow.Controller.ReloadAudioSessions();

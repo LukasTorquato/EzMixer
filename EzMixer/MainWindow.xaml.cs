@@ -119,8 +119,8 @@ namespace EzMixer
         // Function to update all volumes on the mixer
         private void UpdateVolumes()
         {
-            double delta = 0;
-
+            double[] old = {0,0,0,0,0};
+            double noiseReductionThreshold = 0;
             while (true)
             {
                 try
@@ -128,9 +128,11 @@ namespace EzMixer
                     Volumes = Hardware.GetVolume(sensibility);
                     for (int i = 0; i < numSliders; i++)
                     {
-                        if (delta - sensibility > Volumes[i] || delta + sensibility < Volumes[i])
-                            delta = Volumes[i];
-                        Controller.SetSessionVolume(i, Volumes[i]);
+                        if (Math.Abs(Volumes[i] - old[i]) - sensibility > 0 || Volumes[i] == 0 || Volumes[i] == 100)
+                        {
+                            old[i] = Volumes[i];
+                            Controller.SetSessionVolume(i, Volumes[i]);
+                        }
                     }
                     Hardware.ClearInBuffer();
                     Thread.Sleep(pollingMS);

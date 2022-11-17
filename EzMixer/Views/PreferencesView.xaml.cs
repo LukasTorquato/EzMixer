@@ -40,16 +40,12 @@ namespace EzMixer.Views
                 string jsonString = File.ReadAllText(Constants.PrefFileLocation);
                 Preferences = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonString) ?? throw new ArgumentException();
 
-                if (Preferences[Constants.ExitOnCloseKey] != null)
-                    EOC_Toggle.IsOn = bool.Parse(Preferences[Constants.ExitOnCloseKey]);
-                if (Preferences[Constants.WindowsStartupKey] != null)
-                    WinStartup_Toggle.IsOn = bool.Parse(Preferences[Constants.WindowsStartupKey]);
-                if (Preferences[Constants.StartMinimizedKey] != null)
-                    StartMinimized_Toggle.IsOn = bool.Parse(Preferences[Constants.StartMinimizedKey]);
-                if (Preferences[Constants.PollingRateKey] != null)
-                    PollingRate_Slider.Value = int.Parse(Preferences[Constants.PollingRateKey]);
-                if (Preferences[Constants.SensibilityKey] != null)
-                    Sensibility_Slider.Value = int.Parse(Preferences[Constants.SensibilityKey]);
+                EOC_Toggle.IsOn = bool.Parse(Preferences[Constants.ExitOnCloseKey]);
+                WinStartup_Toggle.IsOn = bool.Parse(Preferences[Constants.WindowsStartupKey]);
+                StartMinimized_Toggle.IsOn = bool.Parse(Preferences[Constants.StartMinimizedKey]);
+                PollingRate_Slider.Value = int.Parse(Preferences[Constants.PollingRateKey]);
+                Sensibility_Slider.Value = int.Parse(Preferences[Constants.SensibilityKey]);
+                Sensibility_Text.Text = Preferences[Constants.SensibilityKey];
             }
             else
             {
@@ -58,7 +54,7 @@ namespace EzMixer.Views
                 Preferences[Constants.WindowsStartupKey] = false.ToString();
                 Preferences[Constants.StartMinimizedKey] = false.ToString();
                 Preferences[Constants.PollingRateKey] = 2.ToString();
-                Preferences[Constants.SensibilityKey] = 1.ToString();
+                Preferences[Constants.SensibilityKey] = 2.ToString();
                 SaveState();
             }
         }
@@ -84,7 +80,7 @@ namespace EzMixer.Views
             if (ReportRate_Text != null)
             {   
                 int value = (int)e.NewValue;
-                Preferences[Constants.SensibilityKey] = value.ToString();
+                Preferences[Constants.PollingRateKey] = value.ToString();
                 ReportRate_Text.Text = (value * 50).ToString() + " Hz";
                 MWindow.pollingMS = 1000 / (value * 50);
                 MWindow.Hardware.UpdatePollingRate(value.ToString());
@@ -115,10 +111,9 @@ namespace EzMixer.Views
                 int value = (int)e.NewValue;
                 Preferences[Constants.SensibilityKey] = value.ToString();
                 Sensibility_Text.Text = value.ToString();
-                MWindow.sensibility = value;
+                MWindow.sensibility = value-1;
                 SaveState();
             }
-
         }
 
         private void StartMinimized_Toggled(object sender, RoutedEventArgs e)

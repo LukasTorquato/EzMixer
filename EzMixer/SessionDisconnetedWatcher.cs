@@ -40,8 +40,8 @@ namespace EzMixer
             if (KeyToRemove != "")
             {
                 view.Controller.AvailableApps.Remove(KeyToRemove);
-                view.MView.ComboRefresh();
-                view.GView.UpdateListView();
+                view.MainView.ComboRefresh();
+                view.GroupView.UpdateListView();
             }
 
         }
