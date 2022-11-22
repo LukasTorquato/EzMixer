@@ -80,6 +80,7 @@
                     Content="&#xE111;"
                     Height="30"
                     Width="30"
+                    ToolTip="Add program to the selected group"
                     Click="AddProgram_Click"/>
         
             <Button Margin="0,10,0,0"
@@ -87,6 +88,7 @@
                     Content="&#xE112;"
                     Height="30"
                     Width="30"
+                    ToolTip="Remove program from the selected group"
                     Click="RemoveProgram_Click"/>
         </StackPanel>
 

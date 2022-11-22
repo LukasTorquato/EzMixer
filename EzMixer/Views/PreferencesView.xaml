@@ -20,7 +20,8 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition />
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         
@@ -97,31 +98,30 @@
             FontSize="16"
             Name="ReportRate_Text"
             FontFamily="/Fonts/Poppins/#Poppins ExtraLight"/>
+        
+        <StackPanel Grid.Column="2" Grid.Row="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TextBlock
+                Foreground="White"
+                FontSize="16"
+                FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
+                Text="Report Rate (Per Second)"/>
 
-        <TextBlock Grid.Column="2" Grid.Row="3"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="White"
-            FontSize="16"
-            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
-            Text="Report Rate (Per Second)"/>
-
-        <TextBlock Grid.Column="2" Grid.Row="3"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            Foreground="White"
-            TextAlignment="Center"
-            FontSize="8"
-            FontFamily="/Fonts/Poppins/#Poppins ExtraLight">
-            Higher: Less delay, more CPU usage.<LineBreak/>
-            Lower: More delay, less CPU usage.
-        </TextBlock>
-            
+            <TextBlock
+                Foreground="White"
+                TextAlignment="Center"
+                FontSize="8"
+                FontFamily="/Fonts/Poppins/#Poppins ExtraLight">
+                Higher: Less delay, more CPU usage.<LineBreak/>
+                Lower: More delay, less CPU usage.
+            </TextBlock>
+        </StackPanel>    
         <!-- Polling Rate End -->
 
 
         <!-- Sensibility Start -->
-        <Slider Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+        <Slider Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                 Margin="10,0,10,0"
                 Name="Sensibility_Slider"
                 TickPlacement="TopLeft"
@@ -129,7 +129,7 @@
                 ValueChanged="Sensibility_Changed"
                 TickFrequency="1" Maximum="10" Minimum="2"/>
 
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4"
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Foreground="White"
@@ -137,24 +137,25 @@
             Name="Sensibility_Text"
             FontFamily="/Fonts/Poppins/#Poppins ExtraLight"/>
 
-        <TextBlock Grid.Column="2" Grid.Row="4"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Foreground="White"
-            FontSize="16"
-            FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
-            Text="Control Sensibility"/>
+        <StackPanel Grid.Column="2" Grid.Row="5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TextBlock
+                Foreground="White"
+                FontSize="16"
+                HorizontalAlignment="Center"
+                FontFamily="/Fonts/Poppins/#Poppins ExtraLight"
+                Text="Control Sensibility"/>
 
-        <TextBlock Grid.Column="2" Grid.Row="4"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            Foreground="White"
-            TextAlignment="Center"
-            FontSize="8"
-            FontFamily="/Fonts/Poppins/#Poppins ExtraLight">
-            Higher: Big changes to volume at once.<LineBreak/>
-            Lower: Small changes to volume at once.
-        </TextBlock>
+            <TextBlock 
+                Foreground="White"
+                TextAlignment="Center"
+                FontSize="8"
+                FontFamily="/Fonts/Poppins/#Poppins ExtraLight">
+                Higher: Big changes to volume at once.<LineBreak/>
+                Lower: Small changes to volume at once.
+            </TextBlock>
+        </StackPanel>
 
         <!-- Sensibility End -->
 

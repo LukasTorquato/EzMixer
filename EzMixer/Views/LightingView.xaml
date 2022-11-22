@@ -34,6 +34,7 @@
                 FontFamily="/Fonts/Poppins/#Poppins Medium"
                 Margin="0,0,0,20"
                 VerticalAlignment="Bottom"
+                ToolTip="Apply all changes to the device"
                 Click="Apply_Lighting">
             
         </Button>
@@ -289,6 +290,7 @@
                   IsChecked="False"
                   Checked="CheckBox_Checked"
                   Unchecked="CheckBox_Checked"
+                  ToolTip="Bind LED brightness to the volume level"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Center"/>
 
@@ -298,6 +300,7 @@
                   IsChecked="False"
                   Checked="CheckBox_Checked"
                   Unchecked="CheckBox_Checked"
+                  ToolTip="Bind LED brightness to the volume level"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Center"/>
 
@@ -307,6 +310,7 @@
                   IsChecked="False"
                   Checked="CheckBox_Checked"
                   Unchecked="CheckBox_Checked"
+                  ToolTip="Bind LED brightness to the volume level"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Center"/>
 
@@ -316,6 +320,7 @@
                   IsChecked="False"
                   Checked="CheckBox_Checked"
                   Unchecked="CheckBox_Checked"
+                  ToolTip="Bind LED brightness to the volume level"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Center"/>
 
@@ -325,6 +330,7 @@
                   IsChecked="False"
                   Checked="CheckBox_Checked"
                   Unchecked="CheckBox_Checked"
+                  ToolTip="Bind LED brightness to the volume level"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Center"/>
     </Grid>
