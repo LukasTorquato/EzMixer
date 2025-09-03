@@ -1,4 +1,4 @@
-<img width="1230" height="739" alt="Screenshot 2023-03-03 172318" src="https://github.com/user-attachments/assets/abd3df3d-9d8e-4877-bd96-5467a2357581" /># EzMixer - Hardware Audio Control for Windows
+# EzMixer - Hardware Audio Control for Windows
 
 EzMixer is a powerful Windows application that provides tactile, hardware-based control over your application audio levels. It interfaces with a custom-built controller, powered by an Atmega microcontroller, to give you independent volume control for different applications, complete with customizable RGB lighting.
 
